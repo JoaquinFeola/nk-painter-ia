@@ -471,3 +471,8 @@ Preguntas derivadas de F-008 (RN-contenido-del-archivo, RN-fuera-del-archivo, RN
 - respuesta:
   - propuesta: (1) arreglar BUG-001 en una unidad de build antes de seguir con la QA; (2) terminar la QA de Windows cuando la PC quede libre de verdad, re-corriendo US-005 E-13 en las dos áreas tras el arreglo. Alternativas: terminar primero Windows tal como está y arreglar después; o arreglar y re-correr solo E-13.
   - usuario · 2026-10-28: arreglar primero. Se agrega la unidad 117 (arreglar BUG-001) al lote, antes de terminar la 37; luego la 41; se para en la aceptación de F-002.
+
+## QT-113 · ¿Cómo sigue el tramo 5 después de la QA con fallas (BUG-002, BUG-003)?
+- tipo: cambio de plan (unidades de arreglo que el plan no tiene) y autonomía
+- respuesta:
+  - propuesta: agregar la unidad 118 (arreglar BUG-003, lápiz sin presión en Windows) y la 119 (arreglar BUG-002, costuras entre mosaicos), re-correr US-005 E-13 y US-007 E-12 en Windows, y recién después la 41 (QA de US-006 y US-008). Alternativas: seguir con la 41 ahora y arreglar al final del tramo 6; o arreglar solo BUG-003 y pasar BUG-002 a F-001 como deuda.
