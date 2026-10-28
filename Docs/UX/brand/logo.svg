@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <title>nk-painter</title>
+  <rect width="128" height="128" rx="24" fill="#1C1C1C"/>
+  <!-- One pen stroke drawing an "n", lifted at the end: the dot is where the pen left the canvas. -->
+  <path d="M34 98 V60 C34 41 47 31 62 31 C77 31 88 41 88 60 V84" fill="none" stroke="#3DD6B5" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="88" cy="102" r="6" fill="#3DD6B5"/>
+</svg>

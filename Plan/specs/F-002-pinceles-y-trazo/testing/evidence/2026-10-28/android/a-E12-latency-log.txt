@@ -1,0 +1,21 @@
+--------- beginning of main
+10-28 18:01:30.005 31197 31310 I nkpainter-latency: stroke: 35 frames · average 18 ms · p95 24 ms · max 27 ms
+10-28 18:01:30.370 31197 31310 I nkpainter-latency: stroke: 23 frames · average 22 ms · p95 23 ms · max 119 ms
+10-28 18:01:30.737 31197 31310 I nkpainter-latency: stroke: 35 frames · average 17 ms · p95 22 ms · max 22 ms
+10-28 18:01:31.104 31197 31310 I nkpainter-latency: stroke: 31 frames · average 17 ms · p95 22 ms · max 23 ms
+10-28 18:01:31.488 31197 31310 I nkpainter-latency: stroke: 35 frames · average 17 ms · p95 22 ms · max 23 ms
+10-28 18:01:31.869 31197 31310 I nkpainter-latency: stroke: 35 frames · average 18 ms · p95 22 ms · max 24 ms
+10-28 18:01:32.248 31197 31310 I nkpainter-latency: stroke: 36 frames · average 18 ms · p95 22 ms · max 28 ms
+10-28 18:01:32.606 31197 31310 I nkpainter-latency: stroke: 32 frames · average 18 ms · p95 22 ms · max 25 ms
+10-28 18:01:32.971 31197 31310 I nkpainter-latency: stroke: 35 frames · average 18 ms · p95 26 ms · max 29 ms
+10-28 18:01:33.337 31197 31310 I nkpainter-latency: stroke: 35 frames · average 18 ms · p95 23 ms · max 29 ms
+10-28 18:01:33.720 31197 31310 I nkpainter-latency: stroke: 38 frames · average 17 ms · p95 22 ms · max 36 ms
+10-28 18:01:34.098 31197 31310 I nkpainter-latency: stroke: 32 frames · average 21 ms · p95 32 ms · max 40 ms
+10-28 18:01:34.530 31197 31310 I nkpainter-latency: stroke: 32 frames · average 18 ms · p95 23 ms · max 29 ms
+10-28 18:01:34.889 31197 31310 I nkpainter-latency: stroke: 35 frames · average 17 ms · p95 22 ms · max 23 ms
+10-28 18:01:35.255 31197 31310 I nkpainter-latency: stroke: 35 frames · average 17 ms · p95 22 ms · max 22 ms
+10-28 18:01:35.621 31197 31310 I nkpainter-latency: stroke: 35 frames · average 18 ms · p95 26 ms · max 28 ms
+10-28 18:01:35.988 31197 31310 I nkpainter-latency: stroke: 35 frames · average 18 ms · p95 22 ms · max 25 ms
+10-28 18:01:36.354 31197 31310 I nkpainter-latency: stroke: 35 frames · average 17 ms · p95 21 ms · max 22 ms
+10-28 18:01:36.720 31197 31310 I nkpainter-latency: stroke: 35 frames · average 17 ms · p95 22 ms · max 23 ms
+10-28 18:01:37.088 31197 31310 I nkpainter-latency: stroke: 31 frames · average 17 ms · p95 23 ms · max 24 ms

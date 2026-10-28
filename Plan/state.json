@@ -1,0 +1,1047 @@
+{
+  "version": 2,
+  "updated": "2026-10-28T21:20:00Z",
+  "goal": "Entrega 1 de nk-painter: esqueleto que camina y las 28 features M de F-001 a F-009, tramo por tramo",
+  "cadence": "delivery",
+  "slices": [
+    {
+      "id": "S2",
+      "name": "Esqueleto que camina",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "build",
+          "status": "done",
+          "units": [
+            {
+              "id": 15,
+              "do": "Crear el proyecto Compose Multiplatform (android y windows) con versiones fijadas (QT-25); arranca vacío en los dos",
+              "status": "done",
+              "detail": "Módulos shared/androidApp/desktopApp; compila y arranca en emulador Android y en Windows; compileSdk 37 (Compose 1.12 lo pide); QT-45"
+            },
+            {
+              "id": 16,
+              "do": "Motor de mosaicos mínimo y un trazo con presión en Android por el front buffer (QT-07, QT-09)",
+              "status": "done",
+              "detail": "Motor en shared/engine (mosaicos, pincel redondo, 5 tests); PenCanvasView con front buffer; trazo observado en emulador; presión real sin probar (emulador da 1.0); QT-46"
+            },
+            {
+              "id": 17,
+              "do": "Módulo de lápiz de Windows por JNA (QT-24) y el mismo trazo en Windows",
+              "status": "done",
+              "detail": "desktopApp/pens con JNA; probado con lápiz sintético (-PpenProbe): presión llega y el trazo se engrosa (QT-48); lápiz físico y goma sin probar"
+            },
+            {
+              "id": 18,
+              "do": "Guardar y reabrir una obra con el formato v1, con test de integración de ZIP (QT-31)",
+              "status": "done",
+              "detail": "shared/projectfiles: escritor y lector v1 (ZIP + manifiesto + capas); 6 tests de integración en disco pasan (QT-50); Android sin test en equipo; guardado en la app sin conectar"
+            },
+            {
+              "id": 19,
+              "do": "Generador de la obra de referencia y herramientas de medición (memoria, demora, cuadros, píxeles)",
+              "status": "done",
+              "detail": "shared/benchmarks: obra de referencia (48 %, 504 MB) y medición; Windows: Pbenchmark; Android: --ez benchmark true y log nkpainter-latency; resultados QT-51; Android sin memoria (QT-52)"
+            },
+            {
+              "id": 103,
+              "do": "Mosaicos en memoria nativa (NDK y calloc, módulo nativememory) en el motor común, verificado con la medición en el emulador (QT-52)",
+              "status": "done",
+              "detail": "TilePixels: Android memoria nativa por JNI, Windows ByteBuffer directo; obra de referencia entra en el emulador (Java 8/192 MB, nativa 553 MB); 14 tests pasan; trazo en pantalla sin probar en las dos"
+            },
+            {
+              "id": 104,
+              "do": "Registro del tipo de puntero (lápiz, goma, dedo) en Windows con un flag, para M-08 (QT-55)",
+              "status": "done",
+              "detail": "-PpenLog imprime una línea por trazo (herramienta, muestras, rango de presión); compila y arranca; la línea no se vio: el lápiz sintético cayó sobre Windows Terminal, que tenía el foco; se observa en M-07/M-08"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 20,
+              "do": "Medir en los equipos del usuario: QT-05, QT-06, QT-08, QT-09, QT-11, QT-33; resultados en architecture-decisions.md",
+              "status": "todo",
+              "detail": "Plan aprobado (Docs/Architecture/skeleton-measurements.md); en pausa hasta que el usuario traiga los logs (QT-56); al llegar, el tramo 2 vuelve a doing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "name": "F-001 Lienzo y vista · parte 1",
+      "status": "done",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "done",
+          "units": [
+            {
+              "id": 21,
+              "do": "Historia US-001-crear-obra con sus criterios",
+              "status": "done",
+              "detail": "14 criterios; Q-75 a Q-78 respondidas; reglas nuevas RN-prearmado-pantalla y RN-obra-nueva-lista; glosario: resolución, tamaño de lienzo, prearmado, reciente"
+            },
+            {
+              "id": 105,
+              "do": "Historia US-002-lienzo-invalido-o-grande con sus criterios",
+              "status": "done",
+              "detail": "13 criterios; Q-79 a Q-81; RN-errores-juntos nueva; propuestas sin confirmar: máximo redondeado hacia abajo, un lienzo igual al umbral no lo supera; el diseño (22) debe dejar fijar los umbrales para QA"
+            },
+            {
+              "id": 106,
+              "do": "Historia US-003-navegar-vista con sus criterios",
+              "status": "done",
+              "detail": "13 criterios; Q-82, Q-83; Q-84 chocó con Q-65 y queda Q-65 (la vista viaja); 3 criterios dependen de F-004/F-007/F-008, tramos posteriores al 4"
+            },
+            {
+              "id": 107,
+              "do": "Historia US-004-cambiar-fondo con sus criterios",
+              "status": "done",
+              "detail": "7 criterios; Q-85; deshacer/rehacer/reabrir dependen de F-004/F-007 como en US-003"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "done",
+          "units": [
+            {
+              "id": 22,
+              "do": "Diseño técnico de F-001 (ofrecido)",
+              "status": "done",
+              "detail": "tech-design/design.md y decisions.md (QT-58 a QT-74, modo propuestas); composición guardada (QT-58); 7 criterios blocked hasta F-004/F-007/F-008 (QT-59); sin verificar: pantalla física en Windows, táctil real, memoria directa JVM"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "done",
+          "units": [
+            {
+              "id": 23,
+              "do": "Sistema de diseño con marca y voz sobre Material 3 (ofrecido; QT-47)",
+              "status": "done",
+              "detail": "Docs/UX/design-system.md y Docs/UX/brand/logo.svg; Q-86 a Q-89 respondidas (oscuro neutro, barras + paneles, logo del agente, tú neutro); Q-90 accesibilidad del producto abierta, para discovery; ui-components.md sin crear: ningún componente tiene dos usuarios aún"
+            },
+            {
+              "id": 24,
+              "do": "Pantallas y estados de US-001, US-002; agrega Material 3 1.9.0 y verifica que funcione con Compose 1.12.2 (QT-47)",
+              "status": "done",
+              "detail": "ux-ui/screen-obra-nueva.md (US-001 y US-002 en una pantalla con diálogo de aviso); Q-91 a Q-93 respondidas (textos propuestos, campo #RRGGBB, A4 al entrar); Material 3 1.9.0 en shared: test de compatibilidad pasa en la JVM, Android compila, sin probar en equipo (QT-47); US-001 CA-14 \"Capa 1\" visible queda blocked hasta F-003"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "done",
+          "units": [
+            {
+              "id": 25,
+              "do": "Implementar US-001-crear-obra",
+              "status": "done",
+              "detail": "US-001 en shared/canvases (dominio, formulario, pantalla), tema, sesión y editores con vista ajustada en Android y Windows; 45 tests pasan; 14 criterios android ✓ windows ✓; Android probado en emulador (pantalla y editor); Windows arranca pero sin captura (bloqueada); sin cubrir hasta QA: prearmado de pantalla girado, \"Capa 1\" visible (F-003)"
+            },
+            {
+              "id": 26,
+              "do": "Implementar US-002-lienzo-invalido-o-grande",
+              "status": "done",
+              "detail": "US-002: chequeo del pedido (motivos juntos, aviso, línea roja con máximo de la misma forma), límite por plataforma con valores fijables por QA, errores por campo y resumen, diálogo de aviso; 59 tests pasan; 11 de 13 criterios android ✓ windows ✓; seguir/no seguir tras el aviso sin cubrir hasta QA"
+            },
+            {
+              "id": 108,
+              "do": "Arreglar BUG-001: en Windows el fondo de color pinta solo una parte del lienzo",
+              "status": "done",
+              "detail": "Causa: drawRect del fondo sólido sin size tomaba el tamaño de la composable a través de la vista; arreglado en DesktopCanvas; test fuera de pantalla nuevo (falló antes, pasa); 60 tests pasan; A4 blanca en la app cubre el lienzo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "done",
+          "units": [
+            {
+              "id": 27,
+              "do": "QA de US-001, US-002 en android y windows",
+              "status": "done",
+              "detail": "Corrido en Android y Windows: US-002 pasa entera; US-001 falla en Windows CA-11, CA-12 y CA-14 (BUG-001, fondo de color incompleto); CA-14 \"Capa 1\" blocked hasta F-003; E-16 blocked (QT-78)"
+            },
+            {
+              "id": 109,
+              "do": "Re-correr US-001 E-11, E-12, E-14 en Windows (y E-01 a E-14 en Windows como regresión del editor)",
+              "status": "done",
+              "detail": "Windows E-01 a E-14 pasan; BUG-001 verified; US-001 qa ✓ salvo CA-14 (\"Capa 1\" blocked hasta F-003)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "name": "F-001 Lienzo y vista · parte 2",
+      "status": "done",
+      "phases": [
+        {
+          "name": "ux",
+          "status": "done",
+          "units": [
+            {
+              "id": 28,
+              "do": "Pantallas y estados de US-003, US-004",
+              "status": "done",
+              "detail": "ux-ui/screen-editor.md: barra superior con Ajustar vista y Fondo, panel Fondo, indicador de vista; propuestas sin decisión del usuario (ubicación, sin confirmar, formato del indicador); 8 criterios blocked hasta F-003/F-004/F-007/F-008"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "done",
+          "units": [
+            {
+              "id": 29,
+              "do": "Implementar US-003-navegar-vista",
+              "status": "done",
+              "detail": "Viewport.movedBy/snapped, TwoFingerGesture, ViewNavigation y EditorScreen (barra con Ajustar vista, indicador) en común, 25 tests nuevos pasan; Android reparte dedos y cancela el trazo húmedo; Windows: táctil (pointerId en PenSample) solo mueve la vista, lápiz corrido por la barra; sin niveles reducidos ni recorte de mosaicos visibles (QT-73, CA-13 sin construir); gestos no probados en pantalla"
+            },
+            {
+              "id": 30,
+              "do": "Implementar US-004-cambiar-fondo",
+              "status": "done",
+              "detail": "Artwork.changeBackground (solo si distinto) y BackgroundPanel en común, 11 tests nuevos pasan; botón Fondo y panel en EditorScreen (hoja abajo bajo 600 dp, flotante si no; cierra con Fondo o tocando fuera; error al llegar a 7 caracteres, propuesta del agente); Android redibuja sin tocar mosaicos; CA-04 a CA-07 siguen blocked (F-004, F-007); panel no probado en pantalla"
+            },
+            {
+              "id": 110,
+              "do": "Arreglar BUG-003: el lienzo de Windows no tapa la barra superior",
+              "status": "done",
+              "detail": "Causa: el Canvas de Compose no recorta a sus límites; clipToBounds en DesktopCanvas; DesktopCanvasBoundsTest falló antes (color del lienzo en la barra) y pasa; tests de desktopApp pasan; sin probar en pantalla (QA 112)"
+            },
+            {
+              "id": 111,
+              "do": "Arreglar BUG-002: el lienzo de Android no se congela tras un pellizco",
+              "status": "done",
+              "detail": "Causa leída en graphics-core (fuente androidx-main, estructura igual a 1.0.4): cada cambio de vista pedía un redibujo; encolados, el hilo del renderizador espera un búfer que solo él libera. RedrawsInFlight (shared/jvmShared, 5 tests) deja uno en vuelo y junta los demás; tests de shared y desktop pasan, Android compila; el congelamiento no se puede reproducir en test: lo prueba la QA 112. Riesgo que queda: commits seguidos de la librería pueden pasar el pool igual"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "done",
+          "units": [
+            {
+              "id": 31,
+              "do": "QA de US-003, US-004 en android y windows",
+              "status": "done",
+              "detail": "Corrida 2026-10-28: US-003 CA-03 a CA-09 y US-004 CA-01, CA-02 qa ✓; BUG-002 (Android congelado, 1 vez) y BUG-003 (Windows tapa la barra) abiertos; sin correr en Windows US-003 E-02, US-004 E-03 y E-06 a 700 px (la entrada fue a otra ventana del usuario)"
+            },
+            {
+              "id": 112,
+              "do": "Re-QA de F-001: BUG-002, BUG-003 y US-003 E-02, US-004 E-03, E-06 en Windows con control de foco",
+              "status": "done",
+              "detail": "Corrida 2026-10-28 (2): BUG-002 y BUG-003 verified (BUG-002 con límite: nunca se reprodujo a pedido; 30 ciclos limpios); US-003 E-02, US-004 E-03 y E-06 a 700 px pasan en Windows con control de foco; US-003 CA-01, CA-02 y US-004 CA-03 qa ✓; evidencia en testing/evidence/2026-10-28-u112"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "name": "F-002 Pinceles y trazo · parte 1",
+      "status": "doing",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "done",
+          "units": [
+            {
+              "id": 32,
+              "do": "Historia US-005-dibujar-con-pincel con sus criterios",
+              "status": "done",
+              "detail": "13 criterios; Q-94 a Q-97 respondidas; reglas nuevas RN-pincel-inicial, RN-toque-deja-punto, RN-trazo-recortado-al-lienzo; color inicial #000000 provisorio; glosario: pincel activo; 3 criterios dependen de F-003/F-004"
+            },
+            {
+              "id": 114,
+              "do": "Historia US-006-ajustar-pincel con sus criterios",
+              "status": "done",
+              "detail": "10 criterios; Q-98 a Q-100; reglas nuevas RN-ajuste-fuera-de-rango, RN-ajustes-no-cambian-lo-pintado; restablecer valores de fábrica queda afuera"
+            },
+            {
+              "id": 115,
+              "do": "Historia US-007-presion con sus criterios",
+              "status": "done",
+              "detail": "12 criterios; Q-101 a Q-103 (tres curvas, proporcional con mínimo 1, la curva persiste); QA de Android necesita presión inyectada o equipo físico, lo decide la 33"
+            },
+            {
+              "id": 116,
+              "do": "Historia US-008-borrar con sus criterios",
+              "status": "done",
+              "detail": "11 criterios; Q-104 a Q-106 (forma inicial Pincel redondo, presión como su pincel, ajustes persisten); 2 criterios dependen de F-003/F-004"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "done",
+          "units": [
+            {
+              "id": 33,
+              "do": "Diseño técnico de F-002 (ofrecido)",
+              "status": "done",
+              "detail": "tech-design/design.md y decisions.md (QT-89 a QT-103, modo propuestas); dos composiciones (QT-89, peor caso 24 bytes/px: línea roja a 2/3, la pregunta dijo 21 y 25 %); presión de Android la corre el usuario en su tableta (QT-90); Q-107 nueva regla y 3 criterios en US-006; sin verificar: muestras juntadas de Android"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "done",
+          "units": [
+            {
+              "id": 34,
+              "do": "Pantallas y estados de US-005, US-007",
+              "status": "done",
+              "detail": "ux-ui/screen-pinceles.md: barra de herramientas con Pincel (nombre del pincel activo) y panel Pincel con los 7 y Presión; propuestas sin decisión del usuario (panel sigue abierto al elegir, toque que cierra no pinta, Presión en el panel); screen-editor.md apunta a ella"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "done",
+          "units": [
+            {
+              "id": 35,
+              "do": "Implementar US-005-dibujar-con-pincel",
+              "status": "done",
+              "detail": "Pinceles en shared/brushes (7, estado de dibujo, preferencias por equipo) y BrushStroke con máscara y mosaicos de antes; barra y panel Pincel; 117 tests pasan (115 de shared, 2 de desktopApp), Android compila; 9 de 13 criterios android ✓ windows ✓; sin probar en pantalla; QT-105 a QT-107; dos composiciones propuestas para F-003 (QT-106, sin decisión)"
+            },
+            {
+              "id": 36,
+              "do": "Implementar US-007-presion",
+              "status": "done",
+              "detail": "Curva suave/normal/firme (exponentes 0,6/1/1,7, QT-96) en el código común y guardada en preferencias; Presión en el panel; Android: dedo, mouse y lápiz sin eje de presión a 1; 130 tests pasan; dedo en Windows queda para F-009"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "doing",
+          "units": [
+            {
+              "id": 37,
+              "do": "QA de US-005, US-007 en android y windows",
+              "status": "doing",
+              "detail": "Android hecho y registrado; Windows cortado tras US-005 E-02 (la PC estaba en uso); falta Windows (US-005 E-01, E-03 a E-13; US-007 E-01 a E-12) y lo del usuario en tableta (US-007 E-01 a E-08)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S6",
+      "name": "F-002 Pinceles y trazo · parte 2",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "ux",
+          "status": "done",
+          "units": [
+            {
+              "id": 38,
+              "do": "Pantallas y estados de US-006, US-008",
+              "status": "done",
+              "detail": "screen-pinceles.md ampliada: herramienta Goma en la barra, ajustes de grosor/opacidad/estabilizador (deslizador + campo, recorte al límite sin error) y panel Goma; 8 propuestas del agente sin confirmar listadas en Pendiente"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "done",
+          "units": [
+            {
+              "id": 39,
+              "do": "Implementar US-006-ajustar-pincel",
+              "status": "done",
+              "detail": "Ajustes por pincel (grosor 1-500, opacidad 1-100, estabilizador 0-10, recorte al límite), guardados al terminar cada cambio; estabilizador QT-95 en Windows y Android; deslizador + campo en el panel; 151 tests pasan; el panel sin probar a mano"
+            },
+            {
+              "id": 40,
+              "do": "Implementar US-008-borrar",
+              "status": "done",
+              "detail": "Herramienta Goma (forma, grosor, opacidad, estabilizador propios, guardados), borrado en el motor (QT-97), panel Goma; arreglado de paso: el tope del Aerógrafo ahora sigue a la presión (defecto de la unidad 36); 167 tests pasan; paneles sin probar a mano"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 41,
+              "do": "QA de US-006, US-008 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S7",
+      "name": "F-003 Capas · parte 1",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 42,
+              "do": "Historias de F-003 (US-009 a US-013) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 43,
+              "do": "Diseño técnico de F-003 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 44,
+              "do": "Pantallas y estados de US-009, US-010, US-011",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 45,
+              "do": "Implementar US-009-gestionar-capas",
+              "status": "todo"
+            },
+            {
+              "id": 46,
+              "do": "Implementar US-010-ver-y-ocultar",
+              "status": "todo"
+            },
+            {
+              "id": 47,
+              "do": "Implementar US-011-limite-de-capas",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 48,
+              "do": "QA de US-009, US-010, US-011 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S8",
+      "name": "F-003 Capas · parte 2",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 49,
+              "do": "Pantallas y estados de US-012, US-013",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 50,
+              "do": "Implementar US-012-recorte-y-bloqueo-alfa",
+              "status": "todo"
+            },
+            {
+              "id": 51,
+              "do": "Implementar US-013-combinar-y-aplanar",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 52,
+              "do": "QA de US-012, US-013 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S9",
+      "name": "F-004 Historial",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 53,
+              "do": "Historias de F-004 (US-014 a US-016) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 54,
+              "do": "Diseño técnico de F-004 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 55,
+              "do": "Pantallas y estados de US-014, US-015, US-016",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 56,
+              "do": "Implementar US-014-deshacer-y-rehacer",
+              "status": "todo"
+            },
+            {
+              "id": 57,
+              "do": "Implementar US-015-largo-del-historial",
+              "status": "todo"
+            },
+            {
+              "id": 58,
+              "do": "Implementar US-016-historial-al-reabrir",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 59,
+              "do": "QA de US-014, US-015, US-016 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "name": "F-007 Galería y autoguardado · parte 1",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 60,
+              "do": "Historias de F-007 (US-023 a US-027) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 61,
+              "do": "Diseño técnico de F-007 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 62,
+              "do": "Pantallas y estados de US-026, US-027",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 63,
+              "do": "Implementar US-026-autoguardado",
+              "status": "todo"
+            },
+            {
+              "id": 64,
+              "do": "Implementar US-027-recuperar-tras-cierre",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 65,
+              "do": "QA de US-026, US-027 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "name": "F-007 Galería y autoguardado · parte 2",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 66,
+              "do": "Pantallas y estados de US-023, US-024, US-025",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 67,
+              "do": "Implementar US-023-recorrer-galeria",
+              "status": "todo"
+            },
+            {
+              "id": 68,
+              "do": "Implementar US-024-gestionar-obras",
+              "status": "todo"
+            },
+            {
+              "id": 69,
+              "do": "Implementar US-025-gestionar-carpetas",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 70,
+              "do": "QA de US-023, US-024, US-025 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "name": "F-005 Color y relleno",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 71,
+              "do": "Historias de F-005 (US-017 a US-019) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 72,
+              "do": "Diseño técnico de F-005 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 73,
+              "do": "Pantallas y estados de US-017, US-018, US-019",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 74,
+              "do": "Implementar US-017-elegir-color",
+              "status": "todo"
+            },
+            {
+              "id": 75,
+              "do": "Implementar US-018-cuentagotas",
+              "status": "todo"
+            },
+            {
+              "id": 76,
+              "do": "Implementar US-019-rellenar",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 77,
+              "do": "QA de US-017, US-018, US-019 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S13",
+      "name": "F-009 Entrada",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 78,
+              "do": "Historias de F-009 (US-033 a US-035) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 79,
+              "do": "Diseño técnico de F-009 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 80,
+              "do": "Pantallas y estados de US-033, US-034, US-035",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 81,
+              "do": "Implementar US-033-rechazo-de-palma",
+              "status": "todo"
+            },
+            {
+              "id": 82,
+              "do": "Implementar US-034-gestos",
+              "status": "todo"
+            },
+            {
+              "id": 83,
+              "do": "Implementar US-035-atajos-de-teclado",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 84,
+              "do": "QA de US-033, US-034, US-035 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S14",
+      "name": "F-006 Selección y transformación",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 85,
+              "do": "Historias de F-006 (US-020 a US-022) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 86,
+              "do": "Diseño técnico de F-006 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 87,
+              "do": "Pantallas y estados de US-020, US-021, US-022",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 88,
+              "do": "Implementar US-020-seleccionar",
+              "status": "todo"
+            },
+            {
+              "id": 89,
+              "do": "Implementar US-021-copiar-y-pegar",
+              "status": "todo"
+            },
+            {
+              "id": 90,
+              "do": "Implementar US-022-transformar",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 91,
+              "do": "QA de US-020, US-021, US-022 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S15",
+      "name": "F-008 Exportar e importar · parte 1",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "analysis",
+          "status": "todo",
+          "units": [
+            {
+              "id": 92,
+              "do": "Historias de F-008 (US-028 a US-032) con sus criterios",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "architecture",
+          "status": "todo",
+          "units": [
+            {
+              "id": 93,
+              "do": "Diseño técnico de F-008 (ofrecido)",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 94,
+              "do": "Pantallas y estados de US-028, US-029, US-030",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 95,
+              "do": "Implementar US-028-exportar-proyecto",
+              "status": "todo"
+            },
+            {
+              "id": 96,
+              "do": "Implementar US-029-importar-proyecto",
+              "status": "todo"
+            },
+            {
+              "id": 97,
+              "do": "Implementar US-030-importacion-rechazada",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 98,
+              "do": "QA de US-028, US-029, US-030 en android y windows",
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S16",
+      "name": "F-008 Exportar e importar · parte 2",
+      "status": "todo",
+      "phases": [
+        {
+          "name": "ux",
+          "status": "todo",
+          "units": [
+            {
+              "id": 99,
+              "do": "Pantallas y estados de US-031, US-032",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "build",
+          "status": "todo",
+          "units": [
+            {
+              "id": 100,
+              "do": "Implementar US-031-exportar-imagen",
+              "status": "todo"
+            },
+            {
+              "id": 101,
+              "do": "Implementar US-032-importar-imagen",
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "name": "verify",
+          "status": "todo",
+          "units": [
+            {
+              "id": 102,
+              "do": "QA de US-031, US-032 en android y windows",
+              "status": "todo"
+            },
+            {
+              "id": 113,
+              "do": "Cerrar F-001 (close.md) tras la aceptación del usuario (QT-85)",
+              "status": "todo",
+              "detail": "Movida del tramo 4 por QT-87 (respetar QT-59); 36 criterios ya en [x]; al llegar, re-correr los 10 abiertos que desbloquean F-003/F-004/F-007/F-008, y CA-13 con la unidad 20"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "approved": true,
+  "delegation": "ask",
+  "autonomy": {
+    "units": [],
+    "keep_stops": []
+  },
+  "waiting_on": "QT-112: la corrida de Windows de la unidad 37 se cortó porque alguien usaba la PC; y BUG-001 (final del trazo recto, US-005 E-13 Android) frena el lote QT-111",
+  "notes": [
+    "QT-85/87: F-001 aceptada, 36 criterios en [x]; 10 abiertos; su cierre es la unidad 113, al final del tramo 16 (QT-59)",
+    "QT-56: el tramo 2 sigue abierto; la unidad 20 espera los logs del usuario y luego se cierra el tramo 2",
+    "Unidad 37: Android corrido (US-005 9 passed, E-13 failed → BUG-001; US-007 E-09/E-10 passed); Windows: solo US-005 E-02. Q-108 abierta. Regla del usuario: commit y push tras lo probado"
+  ]
+}

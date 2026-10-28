@@ -1,0 +1,76 @@
+10-28 18:02:11.164 31535 31535 I libprocessgroup: Created cgroup /sys/fs/cgroup/apps/uid_10228/pid_31535
+10-28 18:02:11.178 31535 31535 I Zygote  : Process 31535 created for com.nkpainter
+10-28 18:02:11.178 31535 31535 I com.nkpainter: Late-enabling -Xcheck:jni
+10-28 18:02:11.189 31535 31535 I com.nkpainter: Using generational CollectorTypeCMC GC.
+10-28 18:02:11.190 31535 31535 W com.nkpainter: Unexpected CPU variant for x86: x86_64.
+10-28 18:02:11.190 31535 31535 W com.nkpainter: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, pantherlake, default
+10-28 18:02:11.220 31535 31535 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+10-28 18:02:11.271 31535 31535 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+10-28 18:02:11.271 31535 31535 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+10-28 18:02:11.355 31535 31535 D nativeloader: Configuring clns-9 for other apk /data/app/~~ISQuu5D9G-PV9VTLmc6G2g==/com.nkpainter-BgSIlFvE_p-FLvgxAmBrMw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~ISQuu5D9G-PV9VTLmc6G2g==/com.nkpainter-BgSIlFvE_p-FLvgxAmBrMw==/lib/x86_64:/data/app/~~ISQuu5D9G-PV9VTLmc6G2g==/com.nkpainter-BgSIlFvE_p-FLvgxAmBrMw==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.nkpainter
+10-28 18:02:11.367 31535 31535 V GraphicsEnvironment: Currently set values for:
+10-28 18:02:11.367 31535 31535 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+10-28 18:02:11.367 31535 31535 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+10-28 18:02:11.368 31535 31535 V GraphicsEnvironment: com.nkpainter is not listed in per-application setting
+10-28 18:02:11.368 31535 31535 V GraphicsEnvironment: No special selections for ANGLE, returning default driver choice
+10-28 18:02:11.369 31535 31535 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-28 18:02:11.449 31535 31551 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+10-28 18:02:11.475 31535 31551 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv1_CM_emulation.so
+10-28 18:02:11.475 31535 31551 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv2_emulation.so
+10-28 18:02:11.492 31535 31551 W libc    : Access denied finding property "vendor.mesa.virtgpu.kumquat"
+10-28 18:02:11.498 31535 31551 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+10-28 18:02:11.498 31535 31551 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-28 18:02:11.561 31535 31535 D CompatChangeReporter: Compat change id reported: 377864165; UID 10228; state: ENABLED
+10-28 18:02:11.617 31535 31535 W HWUI    : Unknown dataspace 0
+10-28 18:02:11.626 31535 31535 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.app.Activity$$ExternalSyntheticLambda0@71410e4
+10-28 18:02:11.644 31535 31556 W libc    : Access denied finding property "vendor.mesa.virtgpu.kumquat"
+10-28 18:02:12.270 31535 31535 D VRI[MainActivity]: WindowInsets changed: 1344x2992 statusBars:[0,159,0,0] navigationBars:[0,0,0,72] mandatorySystemGestures:[0,195,0,96] 
+10-28 18:02:12.354 31535 31539 I com.nkpainter: Compiler allocated 5250KB to compile void android.view.ViewRootImpl.performTraversals(long)
+10-28 18:02:12.793 31535 31535 I HWUI    : Using FreeType backend (prop=Auto)
+10-28 18:02:12.867 31535 31535 I Surface : Creating surface for consumer unnamed-31535-0 with slotExpansion=1 for 64 slots
+10-28 18:02:12.868 31535 31535 I Surface : Creating surface for consumer VRI[MainActivity]#0(BLAST Consumer)0 with slotExpansion=1 for 64 slots
+10-28 18:02:13.006 31535 31535 I com.nkpainter: hiddenapi: Accessing hidden method Landroid/os/SystemProperties;->addChangeCallback(Ljava/lang/Runnable;)V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/compose/ui/platform/AndroidComposeView$Companion; (domain=app, TargetSdkVersion=36) using reflection: allowed
+10-28 18:02:13.029 31535 31535 I Choreographer: Skipped 70 frames!  The application may be doing too much work on its main thread.
+10-28 18:02:13.035 31535 31548 I HWUI    : Davey! duration=1553ms; Flags=1, FrameTimelineVsyncId=30362824, IntendedVsync=95842387671642, Vsync=95842554338302, InputEventId=0, HandleInputStart=95842563247500, AnimationStart=95842563269500, PerformTraversalsStart=95842563474000, DrawStart=95843874597700, FrameDeadline=95842404338308, FrameStartTime=95842563073500, FrameInterval=16666666, WorkloadTarget=16666666, AnimationTime=95842554338302, SyncQueued=95843904561100, SyncStart=95843918909500, IssueDrawCommandsStart=95843919182600, SwapBuffers=95843940693100, FrameCompleted=95843955777200, DequeueBufferDuration=22000, QueueBufferDuration=156200, GpuCompleted=95843955777200, SwapBuffersCompleted=95843941626600, DisplayPresentTime=0, CommandSubmissionCompleted=95843940693100, 
+10-28 18:02:16.877 31535 31580 D ProfileInstaller: Installing profile for com.nkpainter
+10-28 18:02:17.319 31535 31535 D InsetsController: hide(ime())
+10-28 18:02:17.319 31535 31535 I ImeTracker: com.nkpainter:5108e943: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-28 18:02:20.712 31535 31535 D InsetsController: show(ime())
+10-28 18:02:20.713 31535 31535 I ImeTracker: com.nkpainter:f3045233: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT_BY_INSETS_API fromUser false userId 0 displayId 0
+10-28 18:02:20.714 31535 31535 D InsetsController: Setting requestedVisibleTypes to 511 (was 503)
+10-28 18:02:20.733 31535 31535 I AssistStructure: Flattened final assist data: 840 bytes, containing 1 windows, 5 views
+10-28 18:02:20.786 31535 31535 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): androidx.compose.ui.window.Api33Impl$$ExternalSyntheticLambda0@1a2963c
+10-28 18:02:20.802 31535 31535 I Surface : Creating surface for consumer unnamed-31535-1 with slotExpansion=1 for 64 slots
+10-28 18:02:20.803 31535 31535 I Surface : Creating surface for consumer VRI[Pop-Up Window]#1(BLAST Consumer)1 with slotExpansion=1 for 64 slots
+10-28 18:02:21.812 31535 31558 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[Pop-Up Window]#2) as ready
+10-28 18:02:21.812 31535 31558 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[Pop-Up Window]#3) as ready
+10-28 18:02:22.291 31535 31540 I com.nkpainter: Background concurrent mark compact GC freed 4101KB AllocSpace bytes, 2(64KB) LOS objects, 49% free, 5619KB/10MB, paused 824us,7.882ms total 22.930ms
+10-28 18:02:26.902   686 31629 I ActivityManager: Collecting stacks for pid 31535 into temporary file temp_anr_8359709385064625505.txt
+10-28 18:02:27.255 31535 31535 I ImeTracker: com.nkpainter:eaf0646c: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false userId 0 displayId 0
+10-28 18:02:27.256 31535 31535 D InsetsController: show(ime())
+10-28 18:02:27.256 31535 31535 I ImeTracker: com.nkpainter:eaf0646c: onCancelled at PHASE_CLIENT_REPORT_REQUESTED_VISIBLE_TYPES
+10-28 18:02:27.256 31535 31535 W RemoteInputConnectionImpl: requestCursorUpdates on inactive InputConnection
+10-28 18:02:27.259 31535 31535 I Choreographer: Skipped 390 frames!  The application may be doing too much work on its main thread.
+10-28 18:02:27.448 31535 31547 I HWUI    : Davey! duration=6585ms; Flags=1, FrameTimelineVsyncId=30364320, IntendedVsync=95851621004606, Vsync=95851671004604, InputEventId=0, HandleInputStart=95851679884500, AnimationStart=95851679900600, PerformTraversalsStart=95851710722900, DrawStart=95858105428100, FrameDeadline=95851637671272, FrameStartTime=95851679873100, FrameInterval=16666666, WorkloadTarget=16666666, AnimationTime=95851671004604, SyncQueued=95858110381800, SyncStart=95858149973500, IssueDrawCommandsStart=95858160326200, SwapBuffers=95858160463300, FrameCompleted=95858245890500, DequeueBufferDuration=17700, QueueBufferDuration=319500, GpuCompleted=95858245890500, SwapBuffersCompleted=95858188689700, DisplayPresentTime=-70488363328237970, CommandSubmissionCompleted=95858160463300, 
+10-28 18:02:27.497 31535 31547 I HWUI    : Davey! duration=6706ms; Flags=0, FrameTimelineVsyncId=30364350, IntendedVsync=95851687671270, Vsync=95858187671010, InputEventId=0, HandleInputStart=95858196835700, AnimationStart=95858196852900, PerformTraversalsStart=95858206144700, DrawStart=95858207558600, FrameDeadline=95858271004340, FrameStartTime=95858196538300, FrameInterval=16666666, WorkloadTarget=16666666, AnimationTime=95858187671010, SyncQueued=95858207758100, SyncStart=95858208000800, IssueDrawCommandsStart=95858208066500, SwapBuffers=95858382074800, FrameCompleted=95858393992500, DequeueBufferDuration=21400, QueueBufferDuration=781000, GpuCompleted=95858393591500, SwapBuffersCompleted=95858393992500, DisplayPresentTime=-69431788488275433, CommandSubmissionCompleted=95858382074800, 
+10-28 18:02:27.590 31535 31547 I HWUI    : Davey! duration=6549ms; Flags=0, FrameTimelineVsyncId=30364350, IntendedVsync=95851687671270, Vsync=95858187671010, InputEventId=1221681625, HandleInputStart=95858196835700, AnimationStart=95858196852900, PerformTraversalsStart=95858206144700, DrawStart=95858208528300, FrameDeadline=95851771004600, FrameStartTime=95858196538300, FrameInterval=16666666, WorkloadTarget=16666666, AnimationTime=95858187671010, SyncQueued=95858211107200, SyncStart=95858413765800, IssueDrawCommandsStart=95858413837500, SwapBuffers=95858415604600, FrameCompleted=95858439638000, DequeueBufferDuration=17800, QueueBufferDuration=188100, GpuCompleted=95858439554300, SwapBuffersCompleted=95858439638000, DisplayPresentTime=0, CommandSubmissionCompleted=95858415604600, 
+10-28 18:02:27.634 31535 31535 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.nkpainter
+10-28 18:02:27.816 31535 31535 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+10-28 18:02:27.898   686 31629 E android.os.Debug: Failed to get binder state info for pid: 31535 status: -2: Success
+10-28 18:02:27.903 31535 31535 I ImeTracker: com.nkpainter:f3045233: onShown
+10-28 18:02:27.918 31535 31536 I com.nkpainter: Thread[2,tid=31536,WaitingInMainSignalCatcherLoop,Thread*=0x776b85a426f0,peer=0x2000470,"Signal Catcher"]: reacting to signal 3
+10-28 18:02:27.919 31535 31536 I com.nkpainter: 
+10-28 18:02:27.920   369   369 I tombstoned: registered intercept for pid 31535 and type kDebuggerdJavaBacktrace
+10-28 18:02:28.249   369   369 I tombstoned: found intercept fd 512 for pid 31535 and type kDebuggerdJavaBacktrace
+10-28 18:02:28.249 31535 31536 I com.nkpainter: Wrote stack traces to tombstoned
+10-28 18:02:29.241 31535 31535 D InsetsController: show(ime())
+10-28 18:02:29.241 31535 31535 I ImeTracker: com.nkpainter:25f5f198: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT_BY_INSETS_API fromUser false userId 0 displayId 0
+10-28 18:02:29.241 31535 31535 I ImeTracker: com.nkpainter:25f5f198: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+10-28 18:02:29.273 31535 31535 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): androidx.compose.ui.window.Api33Impl$$ExternalSyntheticLambda0@7a3e9aa
+10-28 18:02:29.295 31535 31535 I Surface : Creating surface for consumer unnamed-31535-2 with slotExpansion=1 for 64 slots
+10-28 18:02:29.296 31535 31535 I Surface : Creating surface for consumer VRI[Pop-Up Window]#2(BLAST Consumer)2 with slotExpansion=1 for 64 slots
+10-28 18:02:29.454 31535 31535 I ImeTracker: com.nkpainter:e13cdfe6: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false userId 0 displayId 0
+10-28 18:02:29.454 31535 31535 D InsetsController: show(ime())
+10-28 18:02:29.454 31535 31535 I ImeTracker: com.nkpainter:e13cdfe6: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+10-28 18:02:30.012 31535 31535 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+10-28 18:02:34.499 31535 31535 I ImeTracker: com.nkpainter:44c486e: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED

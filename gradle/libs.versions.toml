@@ -1,0 +1,37 @@
+[versions]
+kotlin = "2.4.21"
+agp = "9.3.1"
+compose = "1.12.2"
+composeMaterial3 = "1.9.0"
+activityCompose = "1.13.0"
+graphicsCore = "1.0.4"
+jna = "5.19.1"
+kotlinxSerialization = "1.12.0"
+kotlinxCoroutines = "1.11.0"
+android-compileSdk = "37"
+android-minSdk = "29"
+android-targetSdk = "36"
+android-ndk = "27.1.12297006"
+cmake = "3.22.1"
+
+[libraries]
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMaterial3" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-graphics-core = { module = "androidx.graphics:graphics-core", version.ref = "graphicsCore" }
+jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+[plugins]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
