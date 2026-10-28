@@ -85,4 +85,9 @@ que el trazo siga a mi mano sin demora, para dibujar como lo haría en papel.
   deshacer (F-004), blocked; el motor ya pinta solo la capa activa y entrega los mosaicos de antes
   (QT-100). La demora y el trazo continuo no los alcanza un test: los mide QA (QT-92), con
   `nkpainter-latency` en Android y `-PlatencyLog` en Windows.
+- Unidad 119 (BUG-002): en Windows, con zoom menor a 100 %, cada mosaico se dibujaba con los
+  bordes suavizados y dejaba pasar el fondo donde un borde de mosaico cae dentro de un píxel de
+  pantalla. Ahora se dibujan sin suavizar los bordes, como ya hacía Android. Un test de Windows
+  dibuja un trazo que cruza un borde de mosaico al 64 % y falla si aparece la línea clara; el
+  trazo continuo entero sigue siendo de QA, así que el criterio queda sin marca de área.
 - Grosor, opacidad y estabilizador son de US-006; la presión, de US-007; la goma, de US-008.

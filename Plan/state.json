@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-29T00:05:00Z",
+  "updated": "2026-10-28T19:32:14Z",
   "goal": "Entrega 1 de nk-painter: esqueleto que camina y las 28 features M de F-001 a F-009, tramo por tramo",
   "cadence": "delivery",
   "slices": [
@@ -308,7 +308,7 @@
         },
         {
           "name": "build",
-          "status": "doing",
+          "status": "done",
           "units": [
             {
               "id": 35,
@@ -337,14 +337,14 @@
             {
               "id": 119,
               "do": "Arreglar BUG-002 de F-002: costuras entre mosaicos en Windows con zoom menor a 100 % (QT-113)",
-              "status": "doing",
-              "detail": "Sin empezar: leer DesktopCanvas.kt (dibujo de mosaicos con filtro) y reproducir la costura en un test si el nivel lo permite"
+              "status": "done",
+              "detail": "Causa: suavizado de bordes por mosaico en DesktopCanvas (no el filtro); mosaicos sin suavizado; test DesktopCanvasTileSeamTest falla antes (62) y pasa después; 169 tests pasan; falta verlo en la app (unidad 120)"
             }
           ]
         },
         {
           "name": "verify",
-          "status": "todo",
+          "status": "doing",
           "units": [
             {
               "id": 37,

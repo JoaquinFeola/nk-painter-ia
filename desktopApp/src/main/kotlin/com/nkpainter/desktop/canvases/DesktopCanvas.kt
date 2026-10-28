@@ -9,9 +9,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.PointerType
@@ -70,9 +72,17 @@ fun DesktopCanvas(painter: DesktopPainter) {
                 }
                 // Above 100 % each canvas pixel shows as a square, so the Píxel brush keeps hard edges.
                 val filter = if (viewport.zoom > 1f) FilterQuality.None else FilterQuality.Low
-                painter.tileImages.forEach { (coordinate, image) ->
-                    val origin = IntOffset(coordinate.column * Tile.SIZE, coordinate.row * Tile.SIZE)
-                    drawImage(image, dstOffset = origin, filterQuality = filter)
+                // drawImage smooths the edges of each tile; where a tile edge falls inside a screen pixel the
+                // two partial tiles let the background through as a light line (BUG-002 of F-002).
+                val tilePaint = Paint().apply {
+                    isAntiAlias = false
+                    filterQuality = filter
+                }
+                drawIntoCanvas { canvas ->
+                    painter.tileImages.forEach { (coordinate, image) ->
+                        val origin = IntOffset(coordinate.column * Tile.SIZE, coordinate.row * Tile.SIZE)
+                        canvas.drawImageRect(image, dstOffset = origin, paint = tilePaint)
+                    }
                 }
             }
             drawRect(NkPainterColors.ControlBorder, size = canvasSize, style = Stroke(width = CANVAS_BORDER_PX / viewport.zoom))
