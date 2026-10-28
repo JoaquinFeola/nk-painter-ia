@@ -110,11 +110,12 @@ materiales.
 ## Cobertura
 | Criterio | Escenarios | Estado |
 |---|---|---|
-| CA-01 a CA-08 | E-01 a E-08 | pending (Windows: agente; Android: usuario) |
-| CA-09 | E-09 | android passed · windows pending |
+| CA-01, CA-03 a CA-08 | E-01, E-03 a E-08 | windows passed · android pending (usuario) |
+| CA-02 | E-02 | **windows failed (ancho, Q-109)** · android pending (usuario) |
+| CA-09 | E-09 | android passed · windows passed |
 | CA-10 | E-10 | android passed; Windows sin escenario (F-009) |
-| CA-11 | E-11 | pending (Windows); Android blocked |
-| CA-12 | E-12 | pending (Windows); Android blocked |
+| CA-11 | E-11 | windows passed; Android blocked |
+| CA-12 | E-12 | **windows failed (BUG-003)**; Android blocked |
 
 Bordes buscados: presión mayor que 1 (Android puede mandarla) la recortan la entrada de
 Android y la curva, sin escenario ni test propio (hueco de prioridad baja); un lápiz que se va
@@ -130,5 +131,26 @@ de rango en medio del trazo es de F-009.
 | E-11, E-12 | blocked | sin mouse ni lápiz sin presión en el emulador (previsto en el plan) | — |
 | E-01 a E-08 | pending | los corre el usuario en su tableta (QT-90) | — |
 
-### Corrida 2026-10-28 · Windows · **sin correr**
+### Corrida 2026-10-28 · Windows · **sin correr** (se corrió en la corrida (2), abajo)
 E-01 a E-09, E-11 y E-12: pending. La corrida de Windows se cortó en US-005 E-02 porque alguien estaba usando la PC (ver `US-005-dibujar-con-pincel.md`).
+
+### Corrida 2026-10-28 (2) · Windows · lo del agente, tras la unidad 117
+Obra de 1200×600 al 115 % (sin filtro de pantalla). Presión inyectada con `tools/inject-pen.ps1` (0 a 1024). Ancho: corte vertical a mitad de la línea, píxeles con más de 50 % de tinta (para el Aerógrafo, gris de más de 10 %), dividido por el zoom. Evidencia: `evidence/2026-10-28/windows/`.
+
+| Escenario | Estado | Real | Evidencia |
+|---|---|---|---|
+| E-01 | passed | Normal, Pincel redondo, 512: 10,4 px | `w-US007-E01-E03-E04-E05-E11-E12.png` |
+| E-02 | **failed** | Normal, Aerógrafo, 15 pasadas a 512 sin levantar (el plan dice 10; el tope corta igual): centro 127 = 50 % de opacidad, **bien**; ancho con más de 10 % de gris: **51,3 px**, y a presión completa 54,7 px (el plan esperaba 60 ± 2). El borde difuso se desvanece antes del diámetro nominal en las dos presiones; cómo se mide el ancho de un pincel de borde difuso no lo dice el criterio → **Q-109** (pregunta, no bug) | `w-US007-E02-aerografo-normal-y-completa.png` |
+| E-03 | passed | Rotulador a 307 (30 %): 15,6 px y #000000 en el centro | `w-US007-E01-E03-E04-E05-E11-E12.png` |
+| E-04 | passed | Pincel redondo, 101 puntos de 102 a 1024; medido cada 50 px: 2,6 → 3,5 → 4,3 → 5,2 → 5,2 → 7,0 → 7,0 → 8,7 → 8,7 → 9,6 → 11,3 → 12,2 → 13,0 → 13,0 → 14,8 → 14,8 → 17,4 → 17,4 → 18,2 → 19,1 → 20,0. Nunca baja; el salto más grande es 2,6 px, dentro de "no más de 2" con la tolerancia de ±1 de la medida (cada píxel de pantalla es 0,87 px del lienzo) | `w-US007-E01-E03-E04-E05-E11-E12.png` |
+| E-05 | passed | presión 10 (1 %): queda una línea fina gris visible, no 0 | `w-US007-E05-E12-detalle.png` |
+| E-06 | passed | Suave, Pincel redondo, 512: 13,0 px (más de 10) | `w-US007-E06-suave.png` |
+| E-07 | passed | Firme, 512: 7,0 px (menos de 10) | `w-US007-E07-firme.png` |
+| E-08 | passed | Firme y después Aerógrafo, pasadas a 512: centro 177, más claro que 50 % (más de 136) | `w-US007-E08-aerografo-firme.png` |
+| E-09 | passed | Suave, cerrar la ventana, `:desktopApp:run`, crear obra, abrir Pincel: Suave marcada, leída sin tocar el panel. Cleanup: vuelta a Normal (hecho) | `w-US007-E09-01-suave.png`, `w-US007-E09-02-reabierta.png` |
+| E-11 | passed | mouse sintético, Pincel redondo: 20,9 px y #000000 en el centro | `w-US007-E01-E03-E04-E05-E11-E12.png` |
+| E-12 | **failed** | lápiz sintético sin máscara de presión, Pincel redondo: sale una línea gris de 2,6 px (la presión mínima), no de 20 px; el registro del lápiz dice `pressure=0.000..0.000` → BUG-003 | `w-US007-E05-E12-detalle.png` |
+
+- **Repetición que no es escenario:** en y = 150 hay una segunda línea con Suave: el primer clic en Firme no se tomó. No cuenta para ningún criterio.
+- **Cómo se eligió la curva:** tocando la opción a medio ver bajo el borde de la ventana (ver la observación de la rueda en US-005, corrida 3).
+

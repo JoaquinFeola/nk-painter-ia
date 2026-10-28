@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-28T22:50:00Z",
+  "updated": "2026-10-28T23:40:00Z",
   "goal": "Entrega 1 de nk-painter: esqueleto que camina y las 28 features M de F-001 a F-009, tramo por tramo",
   "cadence": "delivery",
   "slices": [
@@ -332,13 +332,13 @@
         },
         {
           "name": "verify",
-          "status": "doing",
+          "status": "done",
           "units": [
             {
               "id": 37,
               "do": "QA de US-005, US-007 en android y windows",
-              "status": "doing",
-              "detail": "Android: completa y E-13 re-corrida passed tras la 117 (corrida 2); falta Windows (US-005 E-01, E-03 a E-13; US-007 E-01 a E-12), que cierra BUG-001; lo del usuario en tableta (US-007 E-01 a E-08); paquete Android: com.nkpainter"
+              "status": "done",
+              "detail": "Corrida completa en las dos áreas (lo del agente). US-005: 8 criterios qa ✓; E-13 Windows failed (BUG-002 costuras entre mosaicos). US-007: CA-09 y CA-10 qa ✓; E-02 Windows failed por Q-109 (ancho del borde difuso); E-12 Windows failed (BUG-003 lápiz sin presión). BUG-001 sin su síntoma en las dos, se verifica cuando E-13 pase. Falta lo del usuario en tableta (US-007 E-01 a E-08)"
             }
           ]
         }
@@ -1041,14 +1041,10 @@
   "approved": true,
   "delegation": "ask",
   "autonomy": {
-    "units": [
-      117,
-      37,
-      41
-    ],
+    "units": [],
     "keep_stops": []
   },
-  "waiting_on": null,
+  "waiting_on": "QA del tramo 5 con fallas: BUG-002 y BUG-003 (sin unidad de arreglo en el plan), Q-109 (el usuario), y la corrida del usuario en su tableta (US-007 E-01 a E-08). El lote 117/37/41 paró por las fallas; la 41 no empezó",
   "notes": [
     "QT-85/87: F-001 aceptada, 36 criterios en [x]; 10 abiertos; su cierre es la unidad 113, al final del tramo 16 (QT-59)",
     "QT-56: el tramo 2 sigue abierto; la unidad 20 espera los logs del usuario y luego se cierra el tramo 2",

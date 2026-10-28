@@ -115,19 +115,19 @@ Sin efectos materiales.
 ## Cobertura
 | Criterio | Escenarios | Estado |
 |---|---|---|
-| CA-01 | E-01 | android passed · windows pending |
+| CA-01 | E-01 | android passed · windows passed |
 | CA-02 | E-02 | passed (las dos) |
-| CA-03 | E-03 | android passed · windows pending |
-| CA-04 | E-04 | android passed · windows pending |
-| CA-05 | E-05 | android passed · windows pending |
+| CA-03 | E-03 | android passed · windows passed |
+| CA-04 | E-04 | android passed · windows passed |
+| CA-05 | E-05 | android passed · windows passed |
 | CA-06 | E-06 | blocked (F-003) |
-| CA-07 | E-07 | android passed · windows pending |
-| CA-08 | E-08 | android passed · windows pending |
-| CA-09 | E-09 | android passed · windows pending |
+| CA-07 | E-07 | android passed · windows passed |
+| CA-08 | E-08 | android passed · windows passed |
+| CA-09 | E-09 | android passed · windows passed |
 | CA-10 | E-10 | blocked (F-004) |
 | CA-11 | E-11 | blocked (F-004) |
-| CA-12 | E-12 | android passed (parcial) · windows pending |
-| CA-13 | E-13 | android failed (BUG-001), re-corrida passed · windows pending |
+| CA-12 | E-12 | android passed (parcial) · windows passed (parcial) |
+| CA-13 | E-13 | android passed (re-corrida) · **windows failed (BUG-002)** |
 
 Bordes buscados: repetir el toque del panel (elegir el pincel ya activo, E-04 lo cubre de paso);
 cerrar la app en medio de un trazo es de F-007; datos enormes: E-09 usa A4.
@@ -180,4 +180,24 @@ Build: árbol de trabajo con la unidad 117 (el final del trazo repasa la curva).
 - **Cómo se manejó:** `tools/emu-circle.py`. La consola del emulador recibe coordenadas del panel táctil (0 a 32767), no píxeles: la primera tanda sin escalar cayó arriba y abrió las notificaciones; se cerraron y se repitió escalada.
 - **Observación (no falla el criterio):** donde el trazo se une con su comienzo queda una ondulación suave: el estabilizador también atrasa el arranque, así que el círculo dibujado es un poco más chico que el real y al principio y al final se acerca al real. No es un tramo recto. Lo ve el usuario al aceptar.
 - **Observación:** el paquete de la app es `com.nkpainter` (actividad `.android.MainActivity`), no `com.nkpainter.android` como dice la sección *Datos* para `pm clear`. No queda registrado con qué nombre se corrió el `pm clear` de la corrida 1; E-02 pasó con la herramienta en Lápiz, que es lo que se ve sin preferencias. Para la próxima vez: `pm clear com.nkpainter`.
+
+### Corrida 2026-10-28 (3) · Windows · lo que quedó pendiente, tras la unidad 117
+Build: árbol de trabajo con la unidad 117. `:desktopApp:run -PlatencyLog -PpenLog`, ventana de 1500×1000 en (0, 0); mouse y teclado sintéticos; trazos rápidos y con presión por `tools/inject-pen.ps1`. Evidencia: `evidence/2026-10-28/windows/`.
+
+| Escenario | Estado | Real | Evidencia |
+|---|---|---|---|
+| E-01 | passed | en A4 el panel lista Lápiz, Tinta, Rotulador, Pincel redondo, Aerógrafo, Pincel suave y Píxel, uno por renglón, ninguno cortado | `w-E01-01-panel.png` |
+| E-03 | passed | Tinta, una línea, cerrar la ventana, `:desktopApp:run` de nuevo, crear obra: la herramienta dice "Tinta" y es la marcada | `w-E03-01-tinta.png`, `w-E03-02-reabierta.png` |
+| E-04 | passed | con el Lápiz activo, Aerógrafo: solo él marcado, la herramienta dice "Aerógrafo"; línea difusa y ancha: tinta en 47 px y más de 10 % de gris en 39 px (A4 al 25,5 %; Android dio 54 y 38) | `w-E04-00-lapiz.png`, `w-E04-01-panel.png`, `w-E04-02-linea.png` |
+| E-05 | passed | centro de la línea #000000 en A4 | `w-E05-01-rotulador.png` |
+| E-07 | passed | obra 30×30 a 2977 %: 10 píxeles negros puros sobre la diagonal, ninguno intermedio | `w-E07-01-diagonal.png` |
+| E-08 | passed | un clic en (300, 300) de una obra de 600×600: punto de 20,2 × 20,2 px centrado en (301,0; 300,3) | `w-E08-01-punto.png` |
+| E-09 | passed | en A4 ajustado (queda área a la derecha): los dos tramos llegan al borde derecho; fuera del lienzo, nada | `w-E09-01-trazo.png`, `w-E09-02-zoom.png` |
+| E-12 | passed (parcial) | 20 trazos con el Lápiz y el lápiz sintético en A4: p95 por trazo de 0 a 1 ms, máximo 5 ms. Sigue `qa —` (evidencia parcial, como dice el plan) | `w-E12-01-trazos.png`, `w-E12-latency-log.txt` |
+| E-13 | **failed** | obra 1400×1400, Tinta de fábrica, círculo de 1000 px en 61 puntos cada 5 ms: el final ya sigue la curva (lo de BUG-001 no aparece), pero sobre la línea se ven costuras claras de 1 px donde cruza los bordes de mosaico x = 512 y x = 1024 del lienzo (la columna más oscura da 58 y 40 en vez de 0) → BUG-002 | `w-E13-00-tinta-8.png`, `w-E13-01-circulo.png`, `w-E13-02-costuras-y-final.png` |
+| E-06, E-10, E-11 | blocked | capas (F-003) e historial (F-004) | — |
+
+- **Datos:** la Tinta tenía grosor **476** guardado en `drawing-settings.txt` antes de la corrida (no lo puso el agente; lo más probable es que venga de quien usó la PC durante la corrida cortada). Para E-13 se llevó a 8 (el de fábrica) con el campo del panel; al terminar se devolvió a 476 y quedó activo el Pincel redondo, como estaban (`w-cleanup-tinta-476-pincel-redondo.png`). Quedan en los recientes 30×30, 600×600, 1400×1400 y 1200×600 (dato dejado atrás, como en F-001).
+- **Observación:** con la ventana de 1000 px de alto, el renglón Presión del panel queda bajo el borde. La rueda sintética (`mouse_event`) no desplazó el panel; al tocar una opción a medio ver, el panel se desplaza y la deja a la vista. **No confirmado** si la rueda de un mouse real lo desplaza: lo puede probar el usuario.
+- **Observación:** el registro del lápiz (`-PpenLog`) dice `tool=Pen` con la presión inyectada (700 → 0,684; 1024 → 1,000).
 

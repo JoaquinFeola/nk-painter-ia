@@ -9,26 +9,26 @@ que el trazo siga a mi mano sin demora, para dibujar como lo haría en papel.
 - [ ] **El set base trae los 7 pinceles.** (RN-set-base)
   Cuando elijo pincel, se ofrecen exactamente Lápiz, Tinta, Rotulador, Pincel redondo,
   Aerógrafo, Pincel suave y Píxel.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **La primera vez se dibuja con el Lápiz.** (RN-pincel-inicial)
   Cuando abro la app por primera vez en el equipo y dibujo una línea sin elegir pincel, la
   línea está hecha con el Lápiz.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **Al reabrir la app vuelve el último pincel usado.** (RN-pincel-inicial)
   Cuando dibujo con la Tinta, cierro la app y la vuelvo a abrir, el pincel activo es la Tinta.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **Elegir un pincel lo deja como el único activo.** (RN-un-pincel-activo)
   Cuando, con el Lápiz activo, elijo el Aerógrafo y dibujo una línea, la línea está hecha con
   el Aerógrafo y el Lápiz ya no es el pincel activo.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **El trazo pinta con el color actual.** (RN-pinta-en-capa-activa)
   Cuando, sin haber elegido color, dibujo con el Rotulador una línea de (100, 100) a
   (500, 100) en una obra A4 con fondo blanco, los píxeles del centro de la línea son #000000.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **El trazo pinta solo en la capa activa.** (RN-pinta-en-capa-activa)
   Cuando, con la Capa 2 activa encima de la Capa 1, dibujo una línea de (100, 100) a
@@ -38,18 +38,18 @@ que el trazo siga a mi mano sin demora, para dibujar como lo haría en papel.
 - [ ] **El pincel Píxel no suaviza los bordes.** (RN-pincel-pixel-sin-suavizado)
   Cuando dibujo con el pincel Píxel de grosor 1 una diagonal de (10, 10) a (20, 20) y la miro
   al 3200 %, cada píxel es #000000 opaco o queda sin pintar: ninguno tiene un tono intermedio.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **Un toque sin mover deja un punto.** (RN-toque-deja-punto)
   Cuando toco el punto (300, 300) con el Pincel redondo de grosor 20 y levanto sin moverme,
   queda un punto de 20 px de diámetro centrado en (300, 300).
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **Lo que cae fuera del lienzo no se pinta, y el trazo no se corta.** (RN-trazo-recortado-al-lienzo)
   Cuando, en una obra A4 (2480×3508 px), dibujo sin levantar de (2300, 1000) a (2700, 1000) y
   de vuelta a (2300, 1200), quedan pintados los dos tramos dentro del lienzo, unidos en el
   borde derecho, y no queda pintura fuera de él.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **Un trazo que salió del lienzo se deshace de una vez.** (RN-trazo-recortado-al-lienzo, RN-trazo-en-historial)
   Cuando, después del trazo anterior que salió y volvió a entrar, deshago una vez, desaparecen

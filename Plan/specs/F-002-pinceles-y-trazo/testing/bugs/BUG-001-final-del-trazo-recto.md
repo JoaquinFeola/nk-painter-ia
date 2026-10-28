@@ -30,3 +30,4 @@ Evidencia: `evidence/2026-10-28/android/a-E13-04-circulo.png` (0,3 s),
 - 2026-10-28 · abierto · pending
 - 2026-10-28 · build informa el cambio de código (unidad 117: el final del trazo repasa la curva en vez de saltar recto; causa que build nombró: el estabilizador de fábrica 3 de la Tinta atrasa el punto dibujado y al levantar se unía en línea recta) · fixed, pending verification
 - 2026-10-28 · re-corrida de E-13 en Android passed (US-005, corrida 2) · sigue fixed, pending verification hasta re-correrlo en Windows (QT-112)
+- 2026-10-28 · re-corrida de E-13 en Windows (US-005, corrida 3): el final sigue la curva y el tramo recto no aparece; pero E-13 falló por otra causa (BUG-002, costuras entre mosaicos) · sigue fixed, pending verification: se verifica cuando E-13 pase entero en Windows

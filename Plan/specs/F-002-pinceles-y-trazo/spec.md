@@ -173,6 +173,10 @@ Las historias se escriben después del paso 5, al inicio del tramo de la feature
 
 ## Pendiente
 - (ninguna pregunta abierta). Q-94 a Q-97 respondidas al escribir US-005; Q-98 a Q-100, al escribir US-006; Q-101 a Q-103, al escribir US-007; Q-104 a Q-106, al escribir US-008; Q-107, en el diseño técnico; Q-108, en la QA de US-007 (usuario · 2026-10-28: el 40 % del Aerógrafo es el tope que alcanza al acumular, no lo que deja una pasada).
+- Q-109 · US-007 CA-02 dice que el Aerógrafo en grosor 100 "mide 100 px de ancho". Es un pincel de borde
+  difuso: en Windows, con grosor 60, la tinta de más de 10 % ocupa 51 px al 50 % de presión y 55 px a presión
+  completa (la QA de US-005 en Android vio de 38 a 54 px). ¿El ancho es el grosor nominal del pincel o lo que
+  se ve, y con qué umbral? Frena el `qa` de CA-02 (QA de US-007, corrida de Windows del 2026-10-28).
 - Los valores iniciales marcados *(propuesto)* se calibran al construir.
 - Para arquitectura: cómo se mide la meta de 50 ms y la presión en Windows (notas técnicas
   de `analysis.md`).

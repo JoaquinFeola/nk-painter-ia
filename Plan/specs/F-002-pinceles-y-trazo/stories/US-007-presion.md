@@ -51,12 +51,12 @@ de verdad.
 
 - [ ] **La curva sigue al reabrir la app.** (RN-curva-persiste)
   Cuando elijo la curva suave, cierro la app y la vuelvo a abrir, la curva es suave.
-  android ✓ · windows ✓ · qa —
+  android ✓ · windows ✓ · qa ✓
 
 - [ ] **Con el dedo se dibuja a presión completa.** (RN-sin-presion)
   Cuando dibujo con el dedo con el Lápiz en grosor 20 y opacidad 100 %, la línea mide 20 px y
   pinta al 100 %.
-  android ✓ · windows — · qa —
+  android ✓ · windows — · qa ✓
 
 - [ ] **Con el mouse se dibuja a presión completa.** (RN-sin-presion)
   Cuando dibujo con el mouse con el Lápiz en grosor 20 y opacidad 100 %, la línea mide 20 px
