@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-28T21:20:00Z",
+  "updated": "2026-10-28T22:50:00Z",
   "goal": "Entrega 1 de nk-painter: esqueleto que camina y las 28 features M de F-001 a F-009, tramo por tramo",
   "cadence": "delivery",
   "slices": [
@@ -321,6 +321,12 @@
               "do": "Implementar US-007-presion",
               "status": "done",
               "detail": "Curva suave/normal/firme (exponentes 0,6/1/1,7, QT-96) en el código común y guardada en preferencias; Presión en el panel; Android: dedo, mouse y lápiz sin eje de presión a 1; 130 tests pasan; dedo en Windows queda para F-009"
+            },
+            {
+              "id": 117,
+              "do": "Arreglar BUG-001 de F-002: el final de cada trazo sale recto (QT-112)",
+              "status": "done",
+              "detail": "Causa: estabilizador de fábrica 3 de la Tinta + salto recto al levantar; ahora el final repasa los últimos puntos reales con el atraso que se desvanece; test de regresión con el círculo de la QA (fallaba con 141,7 px, pasa); 168 tests pasan, Android compila; en pantalla sin re-correr (lo hace la 37); el archivo del bug lo mueve la 37"
             }
           ]
         },
@@ -332,7 +338,7 @@
               "id": 37,
               "do": "QA de US-005, US-007 en android y windows",
               "status": "doing",
-              "detail": "Android hecho y registrado; Windows cortado tras US-005 E-02 (la PC estaba en uso); falta Windows (US-005 E-01, E-03 a E-13; US-007 E-01 a E-12) y lo del usuario en tableta (US-007 E-01 a E-08)"
+              "detail": "Android: completa y E-13 re-corrida passed tras la 117 (corrida 2); falta Windows (US-005 E-01, E-03 a E-13; US-007 E-01 a E-12), que cierra BUG-001; lo del usuario en tableta (US-007 E-01 a E-08); paquete Android: com.nkpainter"
             }
           ]
         }
@@ -1035,13 +1041,17 @@
   "approved": true,
   "delegation": "ask",
   "autonomy": {
-    "units": [],
+    "units": [
+      117,
+      37,
+      41
+    ],
     "keep_stops": []
   },
-  "waiting_on": "QT-112: la corrida de Windows de la unidad 37 se cortó porque alguien usaba la PC; y BUG-001 (final del trazo recto, US-005 E-13 Android) frena el lote QT-111",
+  "waiting_on": null,
   "notes": [
     "QT-85/87: F-001 aceptada, 36 criterios en [x]; 10 abiertos; su cierre es la unidad 113, al final del tramo 16 (QT-59)",
     "QT-56: el tramo 2 sigue abierto; la unidad 20 espera los logs del usuario y luego se cierra el tramo 2",
-    "Unidad 37: Android corrido (US-005 9 passed, E-13 failed → BUG-001; US-007 E-09/E-10 passed); Windows: solo US-005 E-02. Q-108 abierta. Regla del usuario: commit y push tras lo probado"
+    "QT-111/QT-112: lote 117, 37, 41 sin parar (el usuario dejó la PC); se para en la aceptación de F-002. Regla del usuario: commit y push tras lo probado"
   ]
 }

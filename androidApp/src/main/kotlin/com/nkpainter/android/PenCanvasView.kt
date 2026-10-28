@@ -61,7 +61,6 @@ class PenCanvasView(
     private var navigating = false
     private var strokeStyle = drawing.strokeStyle()
     private var stabilizer = Stabilizer(0)
-    private var lastRealPoint: StrokePoint? = null
 
     // A pinch moves the view every frame; handing each move to the renderer stalled it for good.
     private val redraws = RedrawsInFlight { post { renderer.renderMultiBufferedLayer(emptyList()) } }
@@ -123,10 +122,9 @@ class PenCanvasView(
     }
 
     private fun commitStroke(event: MotionEvent) {
-        lastRealPoint?.let(stabilizer::landing)?.let { landing ->
+        stabilizer.landing().forEach { landing ->
             renderer.renderFrontBufferedLayer(WetStrokeSample(landing, startsStroke = false, event.eventTime, strokeStyle))
         }
-        lastRealPoint = null
         redraws.startedElsewhere()
         renderer.commit()
     }
@@ -173,10 +171,7 @@ class PenCanvasView(
         return isPen && event.device?.getMotionRange(MotionEvent.AXIS_PRESSURE, event.source) != null
     }
 
-    private fun stabilized(real: StrokePoint): StrokePoint {
-        lastRealPoint = real
-        return stabilizer.follow(real)
-    }
+    private fun stabilized(real: StrokePoint): StrokePoint = stabilizer.follow(real)
 
     private fun toCanvas(x: Float, y: Float, pressure: Float): StrokePoint {
         val (canvasX, canvasY) = artwork.viewport.screenToCanvas(x, y, AreaSize(width, height))

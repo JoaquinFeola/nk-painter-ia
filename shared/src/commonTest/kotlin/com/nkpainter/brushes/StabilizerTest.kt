@@ -1,10 +1,13 @@
 package com.nkpainter.brushes
 
 import com.nkpainter.engine.StrokePoint
+import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.sin
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class StabilizerTest {
@@ -47,9 +50,9 @@ class StabilizerTest {
         val stabilizer = Stabilizer(10)
         tremblingLine.forEach(stabilizer::follow)
 
-        val landing = stabilizer.landing(tremblingLine.last())
+        val landing = stabilizer.landing()
 
-        assertEquals(tremblingLine.last(), landing)
+        assertEquals(tremblingLine.last(), landing.last())
     }
 
     @Test
@@ -57,6 +60,33 @@ class StabilizerTest {
         val stabilizer = Stabilizer(0)
         tremblingLine.forEach(stabilizer::follow)
 
-        assertNull(stabilizer.landing(tremblingLine.last()))
+        assertTrue(stabilizer.landing().isEmpty())
     }
+
+    @Test
+    fun aCircleEndsFollowingItsBendInsteadOfJumpingStraightToThePen() {
+        val stabilizer = Stabilizer(INK_FACTORY_LEVEL)
+        val drawnCircle = circle.map(stabilizer::follow)
+
+        val landing = stabilizer.landing()
+
+        val ending = listOf(drawnCircle.last()) + landing
+        val longestStep = ending.zipWithNext(::distance).max()
+        assertTrue(longestStep <= circleSampleSpacing * 1.5f, "the ending jumps $longestStep px; the pen moved $circleSampleSpacing px a sample")
+    }
+
+    private companion object {
+        const val INK_FACTORY_LEVEL = 3
+        const val CIRCLE_SAMPLES = 60
+        const val CIRCLE_RADIUS = 480f
+    }
+
+    // The QA circle of the defect: 60 samples, closing on its first point.
+    private val circle = (0..CIRCLE_SAMPLES).map { step ->
+        val angle = 2 * PI * step / CIRCLE_SAMPLES
+        StrokePoint(700f + CIRCLE_RADIUS * cos(angle).toFloat(), 700f + CIRCLE_RADIUS * sin(angle).toFloat(), fullPressure)
+    }
+    private val circleSampleSpacing = distance(circle[0], circle[1])
+
+    private fun distance(a: StrokePoint, b: StrokePoint): Float = hypot(a.x - b.x, a.y - b.y)
 }

@@ -470,3 +470,4 @@ Preguntas derivadas de F-008 (RN-contenido-del-archivo, RN-fuera-del-archivo, RN
 - tipo: efecto material de QA (QT-79) y un fallo que frena el lote (QT-111)
 - respuesta:
   - propuesta: (1) arreglar BUG-001 en una unidad de build antes de seguir con la QA; (2) terminar la QA de Windows cuando la PC quede libre de verdad, re-corriendo US-005 E-13 en las dos áreas tras el arreglo. Alternativas: terminar primero Windows tal como está y arreglar después; o arreglar y re-correr solo E-13.
+  - usuario · 2026-10-28: arreglar primero. Se agrega la unidad 117 (arreglar BUG-001) al lote, antes de terminar la 37; luego la 41; se para en la aceptación de F-002.

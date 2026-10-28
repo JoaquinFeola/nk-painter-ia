@@ -14,7 +14,8 @@ de verdad.
 
 - [ ] **La presión cambia la opacidad de un pincel que responde en opacidad, y no el grosor.** (RN-presion-segun-pincel, RN-presion-proporcional)
   Cuando, con la curva normal, apoyo el lápiz digital al 50 % de presión con el Aerógrafo en
-  grosor 100 y opacidad 80 %, la línea pinta al 40 % de opacidad y mide 100 px de ancho.
+  grosor 100 y opacidad 80 %, la línea mide 100 px de ancho y, pintando encima sin levantar,
+  la opacidad sube hasta un tope del 40 % y no lo pasa (Q-108: el 40 % es el tope, no una pasada).
   android ✓ · windows ✓ · qa —
 
 - [ ] **Un pincel que no responde a la presión pinta igual con cualquier presión.** (RN-presion-segun-pincel)

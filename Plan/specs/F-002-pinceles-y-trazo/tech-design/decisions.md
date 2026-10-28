@@ -71,6 +71,7 @@ Modo de los detalles (QT-93 a QT-102):
 
 **QT-95**
 - agente, dentro del alcance: el estabilizador sigue al punto real con un retraso: en cada muestra, el punto dibujado avanza 1 / (1 + nivel) del camino hasta el punto real (nivel 0: va igual). Al levantar, el trazo termina en el último punto real. Es entero y determinista, así que el mismo recorrido da los mismos píxeles (el criterio del temblor de US-006 se prueba repitiendo un recorrido grabado).
+- agente, al arreglar BUG-001 (unidad 117, 2026-10-28): al levantar, el trazo no salta en línea recta desde el punto atrasado hasta el último real, porque eso corta la última curva. Repasa los puntos reales que siguen al más cercano al punto dibujado, corridos por el atraso, y el corrimiento baja en línea hasta cero en el último. Recuerda los últimos 3 × nivel + 2 puntos reales.
 
 **QT-96**
 - agente, dentro del alcance: normal usa la presión tal como llega; suave la eleva a 0,6; firme, a 1,7. Con 50 % dan 66 % y 31 %, que cumplen los criterios de US-007. Los exponentes son valores de fábrica que se calibran al construir.

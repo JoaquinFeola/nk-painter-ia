@@ -127,7 +127,7 @@ Sin efectos materiales.
 | CA-10 | E-10 | blocked (F-004) |
 | CA-11 | E-11 | blocked (F-004) |
 | CA-12 | E-12 | android passed (parcial) · windows pending |
-| CA-13 | E-13 | **android failed (BUG-001)** · windows pending |
+| CA-13 | E-13 | android failed (BUG-001), re-corrida passed · windows pending |
 
 Bordes buscados: repetir el toque del panel (elegir el pincel ya activo, E-04 lo cubre de paso);
 cerrar la app en medio de un trazo es de F-007; datos enormes: E-09 usa A4.
@@ -169,3 +169,15 @@ Build: el árbol de trabajo del 2026-10-28, que ya incluye las unidades 38 a 40 
 | E-01, E-03 a E-13 | pending | la corrida se cortó: apareció en la obra un trazo con el Rotulador que no hizo el agente y el pincel activo cambió; alguien estaba usando la PC, y el mouse sintético (QT-79) no puede convivir con eso | `w-E02-05-panel-presion.png` |
 
 - **Datos:** E-02 setup y teardown corridos (no había preferencias antes; quedan las que creó la app).
+
+### Corrida 2026-10-28 (2) · Android · re-corrida de E-13 tras la unidad 117 (BUG-001)
+Build: árbol de trabajo con la unidad 117 (el final del trazo repasa la curva). Misma obra de 1400×1400, Tinta de fábrica (grosor 8, estabilizador 3).
+
+| Escenario | Estado | Real | Evidencia |
+|---|---|---|---|
+| E-13 | passed | círculo de 60 puntos, radio 480, en 8 tandas (231 ms de bajar a levantar): continuo, y el final sigue la curva con tramos del largo de los demás; ya no está el tramo recto de ~23°. Control lento (radio 300, un punto por llamada, 1,4 s): igual | `a-E13-07-rerun-circulo.png`, `a-E13-08-rerun-control-lento.png`, `a-E13-09-rerun-final-antes-y-despues.png` (izquierda la corrida que falló, derecha esta) |
+
+- **Cómo se manejó:** `tools/emu-circle.py`. La consola del emulador recibe coordenadas del panel táctil (0 a 32767), no píxeles: la primera tanda sin escalar cayó arriba y abrió las notificaciones; se cerraron y se repitió escalada.
+- **Observación (no falla el criterio):** donde el trazo se une con su comienzo queda una ondulación suave: el estabilizador también atrasa el arranque, así que el círculo dibujado es un poco más chico que el real y al principio y al final se acerca al real. No es un tramo recto. Lo ve el usuario al aceptar.
+- **Observación:** el paquete de la app es `com.nkpainter` (actividad `.android.MainActivity`), no `com.nkpainter.android` como dice la sección *Datos* para `pm clear`. No queda registrado con qué nombre se corrió el `pm clear` de la corrida 1; E-02 pasó con la herramienta en Lápiz, que es lo que se ve sin preferencias. Para la próxima vez: `pm clear com.nkpainter`.
+

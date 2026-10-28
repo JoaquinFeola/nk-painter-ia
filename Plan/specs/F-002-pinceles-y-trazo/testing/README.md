@@ -2,10 +2,10 @@
 
 | Historia | Archivo | Última ejecución | Resultado |
 |---|---|---|---|
-| US-005 | `US-005-dibujar-con-pincel.md` | 2026-10-28 (Android completa; Windows interrumpida) | Android: 9 passed, 1 failed (E-13), 3 blocked · Windows: 1 passed, 12 pending |
+| US-005 | `US-005-dibujar-con-pincel.md` | 2026-10-28 (Android completa + re-corrida de E-13; Windows interrumpida) | Android: 10 passed (E-13 en la re-corrida tras BUG-001), 3 blocked · Windows: 1 passed, 12 pending |
 | US-007 | `US-007-presion.md` | 2026-10-28 (solo Android, lo del agente) | Android: 2 passed, 2 blocked, 8 pendientes del usuario · Windows: sin correr |
 
-- **Bugs abiertos:** BUG-001 (el final del trazo sale recto), pending.
+- **Bugs abiertos:** BUG-001 (el final del trazo sale recto), fixed, pending verification: Android re-corrido y passed; falta Windows.
 - **Criterios sin escenario:** US-007 CA-10 en Windows (el dedo no pinta hasta F-009, QT-102).
 - **Blocked de antemano:** US-005 CA-06 (F-003), CA-10 y CA-11 (F-004); US-007 CA-11 y CA-12 en Android (sin mouse ni lápiz sin presión a mano).
 - **Automatizado:** nada de punta a punta; las reglas tienen tests del código común (`BrushStrokeTest`, `PressureTest`, `DrawingStateTest`) y del archivo de preferencias (build).

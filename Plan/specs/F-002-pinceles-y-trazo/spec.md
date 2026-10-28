@@ -172,10 +172,7 @@ Color actual inicial: negro, #000000 (Q-97), hasta que F-005 lo confirme o lo ca
 Las historias se escriben después del paso 5, al inicio del tramo de la feature (QT-03).
 
 ## Pendiente
-- (ninguna pregunta abierta). Q-94 a Q-97 respondidas al escribir US-005; Q-98 a Q-100, al escribir US-006; Q-101 a Q-103, al escribir US-007; Q-104 a Q-106, al escribir US-008; Q-107, en el diseño técnico.
-- Q-108 · US-007 CA-02 dice que el Aerógrafo al 50 % "pinta al 40 %". Como acumula, una sola
-  pasada deja menos (cerca de 16 %) y 40 % es el tope que alcanza al seguir pintando. El agente lo
-  leyó como tope (unidad 40); falta que el usuario lo confirme.
+- (ninguna pregunta abierta). Q-94 a Q-97 respondidas al escribir US-005; Q-98 a Q-100, al escribir US-006; Q-101 a Q-103, al escribir US-007; Q-104 a Q-106, al escribir US-008; Q-107, en el diseño técnico; Q-108, en la QA de US-007 (usuario · 2026-10-28: el 40 % del Aerógrafo es el tope que alcanza al acumular, no lo que deja una pasada).
 - Los valores iniciales marcados *(propuesto)* se calibran al construir.
 - Para arquitectura: cómo se mide la meta de 50 ms y la presión en Windows (notas técnicas
   de `analysis.md`).

@@ -37,7 +37,6 @@ class DesktopPainter(val artwork: Artwork, private val drawing: DrawingState, pr
     private val images = HashMap<TileCoordinate, ImageBitmap>()
     private var stroke: BrushStroke? = null
     private var stabilizer = Stabilizer(0)
-    private var lastRealPoint: StrokePoint? = null
     private val latencies = StrokeLatencies()
     private var undrawnInputNanos = 0L
 
@@ -76,12 +75,10 @@ class DesktopPainter(val artwork: Artwork, private val drawing: DrawingState, pr
 
     fun endStroke() {
         val current = stroke
-        val lastReal = lastRealPoint
-        if (current != null && lastReal != null) stabilizer.landing(lastReal)?.let { refresh(current.addPoint(it)) }
+        if (current != null) stabilizer.landing().forEach { refresh(current.addPoint(it)) }
         // What the tiles were before is history's; until there is one it is dropped.
         current?.finish()
         stroke = null
-        lastRealPoint = null
         latencies.summarizeAndReset()?.let { line -> latencyLog?.invoke(line) }
     }
 
@@ -94,9 +91,7 @@ class DesktopPainter(val artwork: Artwork, private val drawing: DrawingState, pr
 
     private fun paint(current: BrushStroke, screenPoint: StrokePoint, receivedAtNanos: Long) {
         if (undrawnInputNanos == 0L) undrawnInputNanos = receivedAtNanos
-        val real = toCanvas(screenPoint)
-        lastRealPoint = real
-        refresh(current.addPoint(stabilizer.follow(real)))
+        refresh(current.addPoint(stabilizer.follow(toCanvas(screenPoint))))
     }
 
     private fun toCanvas(screenPoint: StrokePoint): StrokePoint {

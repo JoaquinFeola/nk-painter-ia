@@ -26,7 +26,7 @@ Dibujar un trazo (US-005, US-006, US-007):
 7. Mientras tanto, el trazo húmedo se ve en el front buffer en Android y en el lienzo de
    Compose en Windows, como en el esqueleto. La pantalla solo muestra: no mezcla píxeles
    (QT-46).
-8. Al levantar, el trazo termina en el último punto real, se libera la máscara y el trazo
+8. Al levantar, el trazo termina en el último punto real siguiendo la curva que traía el lápiz (QT-95), se libera la máscara y el trazo
    entrega la lista de mosaicos cambiados con su estado de antes (QT-100). Hasta F-004 se
    descarta.
 
