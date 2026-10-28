@@ -48,6 +48,11 @@ materiales.
   con esa presión. Se lee "pinta al 40 %" del criterio como ese tope; queda como pregunta para
   el usuario.
 
+- **Q-109 (usuario, 2026-10-28):** el ancho es el grosor nominal. Desde la re-corrida, E-02 mide el ancho
+  comparando el perfil al 50 % con el de presión completa: si la presión no cambia el grosor, el perfil al 50 %
+  es el de presión completa con la mitad de tinta en cada punto (cociente parejo de 0,5 ± 0,08 en los píxeles
+  con más de 10 % de tinta a presión completa).
+
 ### E-03 · El Rotulador no cambia con la presión
 - **Cubre:** CA-03 · prioridad alta
 - **Pasos:** Rotulador; línea a 307 (30 %).

@@ -17,10 +17,17 @@ La línea mide 20 px (±1): un lápiz sin presión dibuja a presión completa (U
 Evidencia: `evidence/2026-10-28/windows/w-US007-E05-E12-detalle.png` (la línea de la derecha).
 
 ## Lo que no se sabe
-- **Causa sospechada, no confirmada:** la entrada de Windows toma el campo de presión aunque el lápiz
-  no marque que lo informa (`PEN_MASK_PRESSURE`), y lee 0.
+- ~~Causa sospechada: la entrada de Windows toma el campo de presión aunque el lápiz no marque que lo
+  informa.~~ **Descartada** al investigar (unidad 118): la app ya usa presión completa cuando falta
+  `PEN_MASK_PRESSURE` (`WindowsPenInput.kt`).
+- **Hecho observado (2026-10-28):** con una línea temporal que imprimía lo que la app recibe, el trazo
+  inyectado con `penMask` en 0 llegó con `penMask=15` (presión, rotación e inclinaciones) y presión 0; el
+  inyectado con presión llegó con `penMask=15` y 512. Windows le pone la máscara completa al lápiz
+  sintético, así que **con esta herramienta no se puede simular un lápiz sin presión**. No está
+  confirmado en la documentación de Windows; es lo que se observó en esta PC.
 - Probado con el lápiz sintético de Windows (`InjectSyntheticPointerInput` con `penMask` en 0), que es
   el medio que aprobó el plan (QT-108). No se probó con un lápiz físico sin presión.
 
 ## Historial
 - 2026-10-28 · abierto · pending
+- 2026-10-28 · investigado en la unidad 118: lo que falla es la simulación, no se encontró defecto en la app · sigue pending hasta que se decida (QT-114)

@@ -476,3 +476,11 @@ Preguntas derivadas de F-008 (RN-contenido-del-archivo, RN-fuera-del-archivo, RN
 - tipo: cambio de plan (unidades de arreglo que el plan no tiene) y autonomía
 - respuesta:
   - propuesta: agregar la unidad 118 (arreglar BUG-003, lápiz sin presión en Windows) y la 119 (arreglar BUG-002, costuras entre mosaicos), re-correr US-005 E-13 y US-007 E-12 en Windows, y recién después la 41 (QA de US-006 y US-008). Alternativas: seguir con la 41 ahora y arreglar al final del tramo 6; o arreglar solo BUG-003 y pasar BUG-002 a F-001 como deuda.
+  - usuario · 2026-10-28: arreglar los dos. Lote: 118 (BUG-003), 119 (BUG-002), 120 (re-correr en Windows US-005 E-13 y US-007 E-02 y E-12) y 41; se para en la aceptación de F-002, como QT-111.
+
+## QT-114 · ¿Qué se hace con BUG-003 si el lápiz sintético no puede simular un lápiz sin presión?
+- tipo: un fallo que resultó ser de la herramienta de prueba; cambia la unidad 118 y el escenario US-007 E-12 en Windows
+- respuesta:
+  - propuesta: BUG-003 se cierra como no defecto (la app hace lo correcto con lo que Windows entrega); US-007 E-12 en Windows pasa a blocked con esa causa, como ya está en Android; la 118 queda dropped y el lote sigue con la 119. Alternativas: que el usuario lo pruebe con un lápiz físico sin presión, si tiene uno; o tratar presión 0 en contacto como "sin presión" (cambia cómo se ve el apoyo más leve de un lápiz real).
+  - usuario · 2026-10-28: "tengo una tableta gráfica y un lápiz para probarlo". BUG-003 queda pending hasta su corrida; la 118 cierra sin cambio de código (no se encontró defecto) y la prueba del usuario va en la 120. Ojo: E-12 necesita un lápiz que no informe presión; una tableta con presión sirve para ver la presión real, no para E-12.
+

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-28T23:40:00Z",
+  "updated": "2026-10-29T00:05:00Z",
   "goal": "Entrega 1 de nk-painter: esqueleto que camina y las 28 features M de F-001 a F-009, tramo por tramo",
   "cadence": "delivery",
   "slices": [
@@ -308,7 +308,7 @@
         },
         {
           "name": "build",
-          "status": "done",
+          "status": "doing",
           "units": [
             {
               "id": 35,
@@ -327,18 +327,35 @@
               "do": "Arreglar BUG-001 de F-002: el final de cada trazo sale recto (QT-112)",
               "status": "done",
               "detail": "Causa: estabilizador de fábrica 3 de la Tinta + salto recto al levantar; ahora el final repasa los últimos puntos reales con el atraso que se desvanece; test de regresión con el círculo de la QA (fallaba con 141,7 px, pasa); 168 tests pasan, Android compila; en pantalla sin re-correr (lo hace la 37); el archivo del bug lo mueve la 37"
+            },
+            {
+              "id": 118,
+              "do": "Arreglar BUG-003 de F-002: en Windows un lápiz sin presión dibuja con la mínima (QT-113)",
+              "status": "done",
+              "detail": "Sin cambio de código: la app ya dibuja a presión completa sin PEN_MASK_PRESSURE; Windows entrega penMask=15 al lápiz sintético aunque se inyecte 0, así que la falla de E-12 es de la simulación (QT-114). BUG-003 sigue pending hasta la corrida del usuario"
+            },
+            {
+              "id": 119,
+              "do": "Arreglar BUG-002 de F-002: costuras entre mosaicos en Windows con zoom menor a 100 % (QT-113)",
+              "status": "doing",
+              "detail": "Sin empezar: leer DesktopCanvas.kt (dibujo de mosaicos con filtro) y reproducir la costura en un test si el nivel lo permite"
             }
           ]
         },
         {
           "name": "verify",
-          "status": "done",
+          "status": "todo",
           "units": [
             {
               "id": 37,
               "do": "QA de US-005, US-007 en android y windows",
               "status": "done",
               "detail": "Corrida completa en las dos áreas (lo del agente). US-005: 8 criterios qa ✓; E-13 Windows failed (BUG-002 costuras entre mosaicos). US-007: CA-09 y CA-10 qa ✓; E-02 Windows failed por Q-109 (ancho del borde difuso); E-12 Windows failed (BUG-003 lápiz sin presión). BUG-001 sin su síntoma en las dos, se verifica cuando E-13 pase. Falta lo del usuario en tableta (US-007 E-01 a E-08)"
+            },
+            {
+              "id": 120,
+              "do": "Re-correr en Windows US-005 E-13 y US-007 E-02 (Q-109); US-007 E-12 lo corre el usuario con su tableta gráfica (QT-114)",
+              "status": "todo"
             }
           ]
         }
@@ -1041,13 +1058,19 @@
   "approved": true,
   "delegation": "ask",
   "autonomy": {
-    "units": [],
-    "keep_stops": []
+    "units": [
+      119,
+      120,
+      41
+    ],
+    "keep_stops": [
+      120
+    ]
   },
-  "waiting_on": "QA del tramo 5 con fallas: BUG-002 y BUG-003 (sin unidad de arreglo en el plan), Q-109 (el usuario), y la corrida del usuario en su tableta (US-007 E-01 a E-08). El lote 117/37/41 paró por las fallas; la 41 no empezó",
+  "waiting_on": null,
   "notes": [
     "QT-85/87: F-001 aceptada, 36 criterios en [x]; 10 abiertos; su cierre es la unidad 113, al final del tramo 16 (QT-59)",
     "QT-56: el tramo 2 sigue abierto; la unidad 20 espera los logs del usuario y luego se cierra el tramo 2",
-    "QT-111/QT-112: lote 117, 37, 41 sin parar (el usuario dejó la PC); se para en la aceptación de F-002. Regla del usuario: commit y push tras lo probado"
+    "QT-113/114: lote 119, 120, 41; la 120 para por la corrida del usuario (E-12 con su tableta); se para en la aceptación de F-002. Falta también la tableta Android (US-007 E-01 a E-08). Regla del usuario: commit y push tras lo probado"
   ]
 }
