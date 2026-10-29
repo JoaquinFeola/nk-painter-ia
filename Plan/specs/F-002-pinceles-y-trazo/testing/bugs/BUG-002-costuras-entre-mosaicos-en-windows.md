@@ -1,5 +1,5 @@
 # BUG-002 · En Windows, con zoom menor a 100 %, el trazo muestra costuras claras en los bordes de mosaico
-state: pending
+state: verified
 found: 2026-10-28 · escenario E-13 · historia US-005 · criterio "Un trazo largo y rápido sale continuo" (CA-13, requisito no funcional de F-002)
 
 ## Qué pasa
@@ -27,3 +27,5 @@ Evidencia: `evidence/2026-10-28/windows/w-E13-01-circulo.png`, `w-E13-02-costura
 
 ## Historial
 - 2026-10-28 · abierto · pending
+- 2026-10-28 · build informa el cambio de código (unidad 119, commit `3faea35`: los mosaicos se dibujan sin suavizado de bordes en `DesktopCanvas`; el test `DesktopCanvasTileSeamTest` falla antes y pasa después) · fixed, pending verification
+- 2026-10-29 · re-corrida de E-13 en Windows passed (US-005, unidad 120): al 92 % las líneas que cruzan los bordes de mosaico 512 y 1024 llegan a negro, sin costuras · verified

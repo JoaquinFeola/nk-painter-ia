@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-28T19:32:14Z",
+  "updated": "2026-10-29T12:40:46Z",
   "goal": "Entrega 1 de nk-painter: esqueleto que camina y las 28 features M de F-001 a F-009, tramo por tramo",
   "cadence": "delivery",
   "slices": [
@@ -355,7 +355,8 @@
             {
               "id": 120,
               "do": "Re-correr en Windows US-005 E-13 y US-007 E-02 (Q-109); US-007 E-12 lo corre el usuario con su tableta gráfica (QT-114)",
-              "status": "todo"
+              "status": "done",
+              "detail": "2026-10-29: US-005 E-13 passed en Windows (BUG-001 y BUG-002 verified); US-007 E-02 failed solo en el borde difuso del Aerógrafo (centro 50 % y ancho bien) → Q-110; E-12 pending del usuario (tableta)"
             }
           ]
         }
@@ -1059,18 +1060,65 @@
   "delegation": "ask",
   "autonomy": {
     "units": [
-      119,
       120,
-      41
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91
     ],
-    "keep_stops": [
-      120
-    ]
+    "keep_stops": []
   },
-  "waiting_on": null,
+  "waiting_on": "S5: US-007 E-02 falló en el borde difuso del Aerógrafo (cociente 0,29 a 0,71 en 4–5 filas por lado); Q-110 al usuario. El lote de 2026-10-29 paró en esa falla, antes de la 41",
   "notes": [
     "QT-85/87: F-001 aceptada, 36 criterios en [x]; 10 abiertos; su cierre es la unidad 113, al final del tramo 16 (QT-59)",
     "QT-56: el tramo 2 sigue abierto; la unidad 20 espera los logs del usuario y luego se cierra el tramo 2",
-    "QT-113/114: lote 119, 120, 41; la 120 para por la corrida del usuario (E-12 con su tableta); se para en la aceptación de F-002. Falta también la tableta Android (US-007 E-01 a E-08). Regla del usuario: commit y push tras lo probado"
+    "Lote del 2026-10-29: tramos S5 a S14 (unidades 120, 41, 42 a 91) de corrido o hasta 40 % de contexto; sin paradas propias: E-12 con tableta gráfica y US-007 E-01 a E-08 en Android quedan pendientes del usuario sin frenar el lote; la aceptación de F-002 se pide al final. Regla del usuario: commit y push tras lo probado"
   ]
 }

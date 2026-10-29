@@ -116,7 +116,7 @@ materiales.
 | Criterio | Escenarios | Estado |
 |---|---|---|
 | CA-01, CA-03 a CA-08 | E-01, E-03 a E-08 | windows passed · android pending (usuario) |
-| CA-02 | E-02 | **windows failed (ancho, Q-109)** · android pending (usuario) |
+| CA-02 | E-02 | **windows failed (borde difuso, Q-110)** · android pending (usuario) |
 | CA-09 | E-09 | android passed · windows passed |
 | CA-10 | E-10 | android passed; Windows sin escenario (F-009) |
 | CA-11 | E-11 | windows passed; Android blocked |
@@ -159,3 +159,12 @@ Obra de 1200×600 al 115 % (sin filtro de pantalla). Presión inyectada con `too
 - **Repetición que no es escenario:** en y = 150 hay una segunda línea con Suave: el primer clic en Firme no se tomó. No cuenta para ningún criterio.
 - **Cómo se eligió la curva:** tocando la opción a medio ver bajo el borde de la ventana (ver la observación de la rueda en US-005, corrida 3).
 
+### Corrida 2026-10-29 · Windows · re-corrida de E-02 con la medida de Q-109 · unidad 120
+Build: `main` en `3faea35`. Preferencias de fábrica (setup y teardown de US-005 E-02: apartadas y devueltas, hecho). Obra de 1200×600 al 204,8 %, ventana maximizada. Aerógrafo de fábrica (60 px, 100 %), curva Normal; dos líneas de (100, y) a (1100, y) y de vuelta, diez veces sin levantar, cada 10 px: a 512 en y = 200 y a 1024 en y = 420. Corte vertical en x = 300, 600 y 900, leído en el centro de cada píxel del lienzo. Evidencia: `evidence/2026-10-29/windows/`.
+
+| Escenario | Estado | Real | Evidencia |
+|---|---|---|---|
+| E-02 | **failed** | Centro: 0,502 de tinta a 512 (gris 127) y 1,000 a 1024: **bien**. Ancho con tinta: 52 px a 512 y 54 px a 1024; con más de 10 %: 51 y 53 (los tres cortes dan lo mismo). En el núcleo (filas −22 a +21) el cociente es 0,502 parejo. En el borde difuso, 4 a 5 filas de cada lado, el cociente va de **0,29 a 0,71**, fuera del 0,5 ± 0,08 de la medida acordada; el borde de arriba queda más claro que la mitad y el de abajo más oscuro. Que el borde difuso tenga que dar la mitad píxel por píxel no lo dice el criterio (dice la opacidad y el ancho) → **Q-110** (pregunta, no bug) | `w-US007-E02-aerografo-mitad-y-completa.png`, `w-US007-E02-perfiles.txt` |
+| E-12 | pending | lo corre el usuario con su tableta gráfica (QT-114). Ojo: E-12 pide un lápiz que **no** informe presión; una tableta con presión sirve para ver la presión real (E-01 a E-08 en sentido), no para E-12 | — |
+
+- **Causa sospechada de lo del borde (no confirmada):** cada pincelada del Aerógrafo pone el 8 % del tope (`AIRBRUSH_FLOW`), y lo que deja en cada píxel se redondea a un entero de 0 a 255 (`BrushStroke.stamp`). En el borde, donde la punta cubre poco, una pincelada a 512 deja 0, 1 o 2 y una a 1024 deja 1 a 4: el redondeo pesa distinto en las dos presiones y la suma de muchas pasadas lo agranda.

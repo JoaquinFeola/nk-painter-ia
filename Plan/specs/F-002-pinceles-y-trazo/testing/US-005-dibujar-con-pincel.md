@@ -127,7 +127,7 @@ Sin efectos materiales.
 | CA-10 | E-10 | blocked (F-004) |
 | CA-11 | E-11 | blocked (F-004) |
 | CA-12 | E-12 | android passed (parcial) · windows passed (parcial) |
-| CA-13 | E-13 | android passed (re-corrida) · **windows failed (BUG-002)** |
+| CA-13 | E-13 | android passed (re-corrida) · windows passed (re-corrida 2026-10-29) |
 
 Bordes buscados: repetir el toque del panel (elegir el pincel ya activo, E-04 lo cubre de paso);
 cerrar la app en medio de un trazo es de F-007; datos enormes: E-09 usa A4.
@@ -201,3 +201,13 @@ Build: árbol de trabajo con la unidad 117. `:desktopApp:run -PlatencyLog -PpenL
 - **Observación:** con la ventana de 1000 px de alto, el renglón Presión del panel queda bajo el borde. La rueda sintética (`mouse_event`) no desplazó el panel; al tocar una opción a medio ver, el panel se desplaza y la deja a la vista. **No confirmado** si la rueda de un mouse real lo desplaza: lo puede probar el usuario.
 - **Observación:** el registro del lápiz (`-PpenLog`) dice `tool=Pen` con la presión inyectada (700 → 0,684; 1024 → 1,000).
 
+
+### Corrida 2026-10-29 · Windows · re-corrida de E-13 tras la unidad 119 (BUG-002) · unidad 120
+Build: `main` en `3faea35` (arreglo de BUG-002). `:desktopApp:run -PpenLog`, ventana maximizada (2560×1440, la app no aceptó 1500×1000: quedó en 1500×1462 y tapaba el botón Crear); círculo por `tools/inject-pen.ps1`. Evidencia: `evidence/2026-10-29/windows/`, recortada al lienzo (durante la corrida apareció una notificación de otra app en pantalla; no quedó en la evidencia).
+
+| Escenario | Estado | Real | Evidencia |
+|---|---|---|---|
+| E-13 | passed | obra 1400×1400 al 92,1 % (menos de 100 %, donde aparecía BUG-002), Tinta de fábrica (8 px, estabilizador 3), círculo de 1000 px en 61 puntos cada 5 ms: continuo, sin cortes. En los bordes de mosaico x = 512, x = 1024, y = 512 e y = 1024 del lienzo, todas las columnas y filas que cruza la línea llegan a 0 (negro); ya no están las costuras de 58 y 40. El final se une a la curva sin el tramo recto de BUG-001 | `w-E13-03-circulo.png`, `w-E13-04-borde-x512.png`, `w-E13-04-borde-x1024.png`, `w-E13-05-final.png` |
+
+- **Datos:** setup y teardown de E-02 (`data/US-005/`) para correr con los valores de fábrica sin tocar las preferencias del usuario: apartadas antes, devueltas después (hecho; el archivo quedó con la Tinta en 7 y la goma en 52, como estaba). Queda en los recientes el orden nuevo de 1400×1400 y 1200×600 (dato dejado atrás, como en F-001).
+- **Observación (no es falla del criterio):** con el estabilizador 3 de la Tinta, el círculo rápido sale unos 28 px de pantalla (≈30 px del lienzo) más chico de radio que el trazado, desde los 90° del comienzo; en los últimos ~18° el final repasa hasta el punto real (lo que agregó la unidad 117) y ahí se ve un quiebre suave. Es igual que en la corrida 3 y en Android. Medida: `w-E13-05-final.png`.
