@@ -484,3 +484,8 @@ Preguntas derivadas de F-008 (RN-contenido-del-archivo, RN-fuera-del-archivo, RN
   - propuesta: BUG-003 se cierra como no defecto (la app hace lo correcto con lo que Windows entrega); US-007 E-12 en Windows pasa a blocked con esa causa, como ya está en Android; la 118 queda dropped y el lote sigue con la 119. Alternativas: que el usuario lo pruebe con un lápiz físico sin presión, si tiene uno; o tratar presión 0 en contacto como "sin presión" (cambia cómo se ve el apoyo más leve de un lápiz real).
   - usuario · 2026-10-28: "tengo una tableta gráfica y un lápiz para probarlo". BUG-003 queda pending hasta su corrida; la 118 cierra sin cambio de código (no se encontró defecto) y la prueba del usuario va en la 120. Ojo: E-12 necesita un lápiz que no informe presión; una tableta con presión sirve para ver la presión real, no para E-12.
 
+## QT-115 · ¿Se aprueba el plan de pruebas de la unidad 41 (US-006, US-008 y US-007 con los datos del criterio)?
+- tipo: aprobación de un plan de pruebas (antes de correr nada)
+- respuesta:
+  - propuesta: aprobarlo como está. 13 escenarios de US-006, 9 de US-008 (más 2 blocked por F-003 y F-004) y 3 de US-007 con los datos del criterio. Las dos áreas por la pantalla; en Windows el agente toma el mouse y el teclado (QT-79); en Android, el emulador. La presión de Android la corre el usuario en su tableta (QT-90). Datos con la app y las preferencias apartadas y devueltas (QT-108). Alternativas: solo Windows ahora y Android después; o sacar o cambiar escenarios.
+  - usuario · 2026-10-29: aprobado como está; se corre Windows y después Android en el emulador.

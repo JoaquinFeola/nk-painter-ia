@@ -115,8 +115,8 @@ materiales.
 ## Cobertura
 | Criterio | Escenarios | Estado |
 |---|---|---|
-| CA-01, CA-03 a CA-08 | E-01, E-03 a E-08 | windows passed · android pending (usuario) |
-| CA-02 | E-02 | windows passed (re-evaluada con Q-110; se vuelve a correr en la unidad 41 con los datos del criterio) · android pending (usuario) |
+| CA-01, CA-03 a CA-08 | E-01, E-03 a E-08 | windows passed (CA-01 y CA-03 también con los datos del criterio) · android pending (usuario) |
+| CA-02 | E-02 | **windows failed con los datos del criterio (ancho, Q-112)** · android pending (usuario) |
 | CA-09 | E-09 | android passed · windows passed |
 | CA-10 | E-10 | android passed; Windows sin escenario (F-009) |
 | CA-11 | E-11 | windows passed; Android blocked |
@@ -170,3 +170,23 @@ Build: `main` en `3faea35`. Preferencias de fábrica (setup y teardown de US-005
 - **Causa sospechada de lo del borde (no confirmada):** cada pincelada del Aerógrafo pone el 8 % del tope (`AIRBRUSH_FLOW`), y lo que deja en cada píxel se redondea a un entero de 0 a 255 (`BrushStroke.stamp`). En el borde, donde la punta cubre poco, una pincelada a 512 deja 0, 1 o 2 y una a 1024 deja 1 a 4: el redondeo pesa distinto en las dos presiones y la suma de muchas pasadas lo agranda.
 - **Q-110 (usuario, 2026-10-29):** a media presión alcanza con el centro y el ancho; el borde difuso no tiene que dar la mitad píxel por píxel. Desde ahora E-02 espera: centro al 50 % (canal 128 ± 8) y el mismo ancho que a presión completa (± 1 px del lienzo por lado).
 - **E-02 re-evaluada con Q-110, 2026-10-29 · passed** — la misma corrida, sin volver a correr: centro 127, ancho 52 contra 54 px (1 px por lado). La falla de arriba queda como estaba. Observación: a media presión el borde difuso sale algo más claro arriba y más oscuro abajo (`w-US007-E02-perfiles.txt`).
+
+## Re-corrida con los datos del criterio (unidad 41, plan aprobado 2026-10-29, QT-115)
+Con US-006 construido ya se pueden poner los valores que pide el criterio. Solo en Windows, con presión
+inyectada. Android sigue con el usuario en su tableta (E-01 a E-08 en sentido).
+
+- **E-01 con datos del criterio** · CA-01: curva Normal; Lápiz en Grosor 20; línea a 512. **Esperado:** 10 px (±1).
+- **E-02 con datos del criterio** · CA-02: Aerógrafo en Grosor 100 y Opacidad 80; diez idas y vueltas sin
+  levantar a 512, y la misma línea a 1024 para comparar. **Esperado** (Q-108, Q-110): centro al 40 %
+  (canal 153 ±8), y el mismo ancho que a presión completa (±1 px del lienzo por lado).
+- **E-03 con datos del criterio** · CA-03: Rotulador en Grosor 20; línea a 307. **Esperado:** 20 px (±1) y
+  #000000 en el centro.
+
+### Corrida 2026-10-29 (2) · Windows · con los datos del criterio (unidad 41)
+Obra 1200×600 al 205 %, curva Normal, presión inyectada. Evidencia: `evidence/2026-10-29/windows/w-US006-E05-US007-criterio.png`.
+
+| Escenario | Estado | Real |
+|---|---|---|
+| E-01 (criterio) | passed | Lápiz 20 a 512: 10 a 11 filas con tinta (los bordes muy claros), 10 px ±1. Más claro en el centro (gris 135 a 185), porque el Lápiz también responde en opacidad |
+| E-02 (criterio) | **failed** | Aerógrafo 100 y 80 %, diez idas y vueltas: centro a 512 = 153, **el 40 % justo**; a 1024 = 51 (80 %). Ancho con tinta: **86 px** a 512 y **89 px** a 1024. Difieren 1,5 px por lado, y la medida acordada era ±1 por lado. Ninguno llega a los 100 nominales: el borde difuso se desvanece adentro (Q-109). La diferencia está en las filas más claras del borde, lo mismo que en Q-110 → **Q-112** |
+| E-03 (criterio) | passed | Rotulador 20 a 307: 20,0 px y #000000 en el centro |
