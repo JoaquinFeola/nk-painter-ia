@@ -3,10 +3,10 @@
 | Historia | Archivo | Última ejecución | Resultado |
 |---|---|---|---|
 | US-005 | `US-005-dibujar-con-pincel.md` | 2026-10-29 (re-corrida de E-13 en Windows) | Android: 10 passed (E-13 en la re-corrida), 3 blocked · Windows: 10 passed (E-12 parcial; E-13 en la re-corrida), 3 blocked |
-| US-007 | `US-007-presion.md` | 2026-10-29 (re-corrida de E-02 en Windows) | Android: 2 passed, 2 blocked, 8 pendientes del usuario · Windows: 9 passed, 1 failed (E-02, borde difuso: Q-110), E-12 pending (usuario, BUG-003) |
+| US-007 | `US-007-presion.md` | 2026-10-29 (re-corrida de E-02 en Windows) | Android: 2 passed, 2 blocked, 8 pendientes del usuario · Windows: 10 passed (E-02 re-evaluada con Q-110), E-12 pending (usuario, BUG-003) |
 
 - **Bugs abiertos:** BUG-003 (en Windows un lápiz sin presión dibuja con la mínima), pending hasta la corrida del usuario (QT-114). **Verificados el 2026-10-29:** BUG-001 (el final del trazo sale recto) y BUG-002 (costuras entre mosaicos en Windows), con la re-corrida de US-005 E-13 en Windows.
-- **Preguntas abiertas:** Q-110 (si la mitad de opacidad del Aerógrafo vale píxel por píxel en el borde difuso; frena US-007 CA-02). Q-109 respondida el 2026-10-28.
+- **Preguntas abiertas:** ninguna. Q-109 respondida el 2026-10-28 y Q-110 el 2026-10-29 (el borde difuso del Aerógrafo no tiene que dar la mitad píxel por píxel).
 - **Criterios sin escenario:** US-007 CA-10 en Windows (el dedo no pinta hasta F-009, QT-102).
 - **Blocked de antemano:** US-005 CA-06 (F-003), CA-10 y CA-11 (F-004); US-007 CA-11 y CA-12 en Android (sin mouse ni lápiz sin presión a mano).
 - **Automatizado:** nada de punta a punta; las reglas tienen tests del código común (`BrushStrokeTest`, `PressureTest`, `DrawingStateTest`) y del archivo de preferencias (build).

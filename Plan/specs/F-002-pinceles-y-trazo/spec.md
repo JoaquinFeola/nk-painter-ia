@@ -172,8 +172,7 @@ Color actual inicial: negro, #000000 (Q-97), hasta que F-005 lo confirme o lo ca
 Las historias se escriben después del paso 5, al inicio del tramo de la feature (QT-03).
 
 ## Pendiente
-- **Q-110 (abierta, QA de US-007, 2026-10-29):** en el borde difuso del Aerógrafo, ¿la mitad de opacidad a 50 % de presión tiene que valer píxel por píxel, o alcanza con el centro y el ancho? Medido: centro 50 % justo y ancho igual (±1 px por lado); en las 4 o 5 filas del borde, de 0,29 a 0,71 de lo que deja a presión completa. Frena US-007 CA-02.
-- Respondidas: Q-94 a Q-97 respondidas al escribir US-005; Q-98 a Q-100, al escribir US-006; Q-101 a Q-103, al escribir US-007; Q-104 a Q-106, al escribir US-008; Q-107, en el diseño técnico; Q-108, en la QA de US-007 (usuario · 2026-10-28: el 40 % del Aerógrafo es el tope que alcanza al acumular, no lo que deja una pasada); Q-109, en la QA de US-007 (usuario · 2026-10-28: el ancho de un pincel es su grosor nominal, el diámetro del pincel; el borde difuso se desvanece adentro).
+- (ninguna pregunta abierta). Q-94 a Q-97 respondidas al escribir US-005; Q-98 a Q-100, al escribir US-006; Q-101 a Q-103, al escribir US-007; Q-104 a Q-106, al escribir US-008; Q-107, en el diseño técnico; Q-108, en la QA de US-007 (usuario · 2026-10-28: el 40 % del Aerógrafo es el tope que alcanza al acumular, no lo que deja una pasada); Q-109, en la QA de US-007 (usuario · 2026-10-28: el ancho de un pincel es su grosor nominal, el diámetro del pincel; el borde difuso se desvanece adentro); Q-110, en la QA de US-007 (usuario · 2026-10-29: a media presión alcanza con que el centro y el ancho estén bien; el borde difuso no tiene que dar la mitad píxel por píxel).
 - Los valores iniciales marcados *(propuesto)* se calibran al construir.
 - Para arquitectura: cómo se mide la meta de 50 ms y la presión en Windows (notas técnicas
   de `analysis.md`).

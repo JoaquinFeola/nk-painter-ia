@@ -116,7 +116,7 @@ materiales.
 | Criterio | Escenarios | Estado |
 |---|---|---|
 | CA-01, CA-03 a CA-08 | E-01, E-03 a E-08 | windows passed · android pending (usuario) |
-| CA-02 | E-02 | **windows failed (borde difuso, Q-110)** · android pending (usuario) |
+| CA-02 | E-02 | windows passed (re-evaluada con Q-110; se vuelve a correr en la unidad 41 con los datos del criterio) · android pending (usuario) |
 | CA-09 | E-09 | android passed · windows passed |
 | CA-10 | E-10 | android passed; Windows sin escenario (F-009) |
 | CA-11 | E-11 | windows passed; Android blocked |
@@ -168,3 +168,5 @@ Build: `main` en `3faea35`. Preferencias de fábrica (setup y teardown de US-005
 | E-12 | pending | lo corre el usuario con su tableta gráfica (QT-114). Ojo: E-12 pide un lápiz que **no** informe presión; una tableta con presión sirve para ver la presión real (E-01 a E-08 en sentido), no para E-12 | — |
 
 - **Causa sospechada de lo del borde (no confirmada):** cada pincelada del Aerógrafo pone el 8 % del tope (`AIRBRUSH_FLOW`), y lo que deja en cada píxel se redondea a un entero de 0 a 255 (`BrushStroke.stamp`). En el borde, donde la punta cubre poco, una pincelada a 512 deja 0, 1 o 2 y una a 1024 deja 1 a 4: el redondeo pesa distinto en las dos presiones y la suma de muchas pasadas lo agranda.
+- **Q-110 (usuario, 2026-10-29):** a media presión alcanza con el centro y el ancho; el borde difuso no tiene que dar la mitad píxel por píxel. Desde ahora E-02 espera: centro al 50 % (canal 128 ± 8) y el mismo ancho que a presión completa (± 1 px del lienzo por lado).
+- **E-02 re-evaluada con Q-110, 2026-10-29 · passed** — la misma corrida, sin volver a correr: centro 127, ancho 52 contra 54 px (1 px por lado). La falla de arriba queda como estaba. Observación: a media presión el borde difuso sale algo más claro arriba y más oscuro abajo (`w-US007-E02-perfiles.txt`).
